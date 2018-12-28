@@ -20,9 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectRender.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Model\GameManager.h" />
+    <ClInclude Include="Model\GameObject.h" />
+    <ClInclude Include="Model\GameObjectRender.h" />
+    <ClInclude Include="Model\Player.h" />
     <ClInclude Include="Stone.h" />
   </ItemGroup>
   <ItemGroup>

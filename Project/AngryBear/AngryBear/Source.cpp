@@ -3,7 +3,7 @@
 #include <vector>
 #include <ctime> 
 #include <iostream>
-
+#include "Model/GameManager.h"
 #include "SFML/Graphics.hpp"
 #include "Define.h"
 using namespace sf;
@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 	window.setFramerateLimit(FPS_LIMIT);
 
 	// ============================ Init ============================
-	//GameManager::getInstance()->Init();
+	GameManager::getInstance()->Init();
 
 	Clock clock;
 	Time elapsed;
@@ -40,7 +40,7 @@ int main(int argc, char** argv)
 		clock.restart();
 
 		// ================================ Update ================================ 
-		//GameManager::getInstance()->Update(dt);
+		GameManager::getInstance()->Update(dt);
 
 		// ================================ Draw ================================ 
 		window.clear();
