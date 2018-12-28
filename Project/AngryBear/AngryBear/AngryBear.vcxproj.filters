@@ -10,5 +10,9 @@
     <ClInclude Include="Model\Player.h" />
     <ClInclude Include="Model\Stone.h" />
     <ClInclude Include="Define\Define.h" />
+    <ClInclude Include="Model\Enemy.h" />
+    <ClInclude Include="Model\Rock.h" />
+    <ClInclude Include="Model\UnableMovingRock.h" />
+    <ClInclude Include="Model\AbleMovingRock.h" />
   </ItemGroup>
 </Project>
