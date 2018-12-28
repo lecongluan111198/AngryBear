@@ -4,11 +4,11 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="Stone.h" />
     <ClInclude Include="Model\GameManager.h" />
     <ClInclude Include="Model\GameObject.h" />
     <ClInclude Include="Model\GameObjectRender.h" />
     <ClInclude Include="Model\Player.h" />
+    <ClInclude Include="Model\Stone.h" />
+    <ClInclude Include="Define\Define.h" />
   </ItemGroup>
 </Project>

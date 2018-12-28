@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Model/GameManager.h"
 #include "SFML/Graphics.hpp"
-#include "Define.h"
+#include "Define/Define.h"
 using namespace sf;
 using namespace std;
 
