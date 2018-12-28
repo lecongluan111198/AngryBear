@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Define.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectRender.h" />
     <ClInclude Include="Player.h" />
