@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\angry\angrybear\project\angrybear\angrybear\model\gameobjectrender.h(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  LINK : C:\Angry\AngryBear\Project\AngryBear\Debug\AngryBear.exe not found or not built by the last incremental link; performing full link
+  AngryBear.vcxproj -> C:\Angry\AngryBear\Project\AngryBear\Debug\AngryBear.exe
