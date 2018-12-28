@@ -21,6 +21,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>Model</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectRender.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
