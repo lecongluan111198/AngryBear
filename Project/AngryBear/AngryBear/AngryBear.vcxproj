@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define\Define.h" />
+    <ClInclude Include="Model\AbleMovingRock.h" />
+    <ClInclude Include="Model\Enemy.h" />
     <ClInclude Include="Model\GameManager.h" />
     <ClInclude Include="Model\GameObject.h" />
     <ClInclude Include="Model\GameObjectRender.h" />
@@ -31,6 +33,9 @@
     <ClInclude Include="State\LoadingState.h" />
     <ClInclude Include="State\MainMenuState.h" />
     <ClInclude Include="State\State.h" />
+    <ClInclude Include="Model\Rock.h" />
+    <ClInclude Include="Model\Stone.h" />
+    <ClInclude Include="Model\UnableMovingRock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />

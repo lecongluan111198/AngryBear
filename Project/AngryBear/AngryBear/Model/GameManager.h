@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "SFML/Graphics.hpp"
-
+#include "../Define/Define.h"
 class GameManager
 {
 private:
@@ -11,7 +11,7 @@ private:
 public:
 	void Init(const char* textureName = "", int x = 0, int y = 0)
 	{
-		player.Init("C:\\AngryBear\\Project\\AngryBear\\AngryBear\\resources\\player.png", 300, 200);
+		player.Init(TEXTURE_PLAYER, 300, 200);
 	}
 	void Update(float dt)
 	{
