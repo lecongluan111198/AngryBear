@@ -10,5 +10,11 @@
     <ClInclude Include="Model\Player.h" />
     <ClInclude Include="Model\Stone.h" />
     <ClInclude Include="Define\Define.h" />
+    <ClInclude Include="Model\ResourceManager.h" />
+    <ClInclude Include="State\State.h" />
+    <ClInclude Include="State\LoadingState.h" />
+    <ClInclude Include="State\MainMenuState.h" />
+    <ClInclude Include="State\GamePlayState.h" />
+    <ClInclude Include="State\GameOverState.h" />
   </ItemGroup>
 </Project>

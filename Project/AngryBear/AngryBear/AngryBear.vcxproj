@@ -24,7 +24,13 @@
     <ClInclude Include="Model\GameObject.h" />
     <ClInclude Include="Model\GameObjectRender.h" />
     <ClInclude Include="Model\Player.h" />
+    <ClInclude Include="Model\ResourceManager.h" />
     <ClInclude Include="Model\Stone.h" />
+    <ClInclude Include="State\GameOverState.h" />
+    <ClInclude Include="State\GamePlayState.h" />
+    <ClInclude Include="State\LoadingState.h" />
+    <ClInclude Include="State\MainMenuState.h" />
+    <ClInclude Include="State\State.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
