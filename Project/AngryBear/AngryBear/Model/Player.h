@@ -7,4 +7,5 @@
 class Player : public GameObjectRender {
 public:
 	void Update(float frameTime) override {};
+
 };

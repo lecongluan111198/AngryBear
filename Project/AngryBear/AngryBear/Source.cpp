@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 
 		// ================================ Draw ================================ 
 		window.clear();
-		//GameManager::getInstance()->Render(window);
+		GameManager::getInstance()->Render(window);
 
 		window.display();
 	}
