@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectRender.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Stone.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
