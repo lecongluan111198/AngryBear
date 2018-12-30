@@ -6,7 +6,7 @@ class GameManager
 {
 private:
 	Player player;
-	
+	static GameManager* s_Instance;
 
 public:
 	void Init(const char* textureName = "", int x = 0, int y = 0)
@@ -32,13 +32,6 @@ public:
 		}
 		return s_Instance;
 	}
-private:
-	// =================================================
-	static GameManager* s_Instance;
-
-	// =================================================
-
-
 };
 
 GameManager* GameManager::s_Instance = nullptr;
