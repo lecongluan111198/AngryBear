@@ -4,6 +4,7 @@
 #define FPS_LIMIT	3030
 
 #define PLAYER_SPEED	350
+#define ROOTFOLDER		"data.txt"
 #define TEXTURE_PLAYER	"resources/player.png"
 #define TEXTURE_ENEMY	"resources/a1.png"
 

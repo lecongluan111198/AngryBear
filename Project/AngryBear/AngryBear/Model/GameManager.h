@@ -9,9 +9,9 @@ private:
 	
 
 public:
-	void Init(const char* textureName = "", int x = 0, int y = 0)
+	void Init(const char* textureName = "")
 	{
-		player.Init(TEXTURE_PLAYER, 300, 200);
+		player.Init(TEXTURE_PLAYER);
 	}
 	void Update(float dt)
 	{

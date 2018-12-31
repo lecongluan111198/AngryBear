@@ -8,17 +8,30 @@ protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	int dir = 0;
+	int posx = 0, posy = 0;
 public:
-	void Init(const char* textureName, int pos_x , int pos_y)
+	void Init(const char* textureName)
 	{
 		texture.loadFromFile(textureName);
 		sprite.setTexture(texture);
-		sprite.setPosition(pos_x, pos_y);
+		sprite.setPosition(posx, posy);
 		dir = 1;
 	};
 	void Update(float frameTime){};
 	void Render(sf::RenderWindow &window)
 	{
 		window.draw(sprite);
+	}
+	int getPosx() {
+		return posx;
+	}
+	void setPosx(int pos_x) {
+		posx = pos_x;
+	}
+	int getPosy() {
+		return posy;
+	}
+	void setPosy(int pos_y) {
+		posy = pos_y;
 	}
 };
