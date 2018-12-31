@@ -17,6 +17,7 @@ public:
 		sprite.setPosition(posx, posy);
 		dir = 1;
 	};
+	
 	void Update(float frameTime){};
 	void Render(sf::RenderWindow &window)
 	{

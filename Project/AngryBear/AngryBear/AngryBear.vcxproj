@@ -35,6 +35,7 @@
     <ClInclude Include="State\LoadingState.h" />
     <ClInclude Include="State\MainMenuState.h" />
     <ClInclude Include="State\State.h" />
+    <ClInclude Include="State\StateManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />

@@ -1,4 +1,6 @@
 #pragma once
-class State {
+#include "State.h"
+class GameOverState
+{
 
 };
