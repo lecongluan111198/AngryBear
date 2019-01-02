@@ -20,8 +20,6 @@ public:
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,
 			targetSize.y / sprite.getLocalBounds().height);
-
-		dir = 1;
 	};
 	void Update(float frameTime,int num) override {
 		switch (num) {
@@ -49,8 +47,6 @@ public:
 		default:
 			break;
 		}
-		
-
 		sprite.setPosition(posx, posy);
 	};
 	void UpdateColor(float dt) {
