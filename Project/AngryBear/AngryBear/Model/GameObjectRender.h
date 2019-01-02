@@ -7,7 +7,6 @@ class GameObjectRender : public GameObject {
 protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
-	int dir = 0;
 	int posx = 0, posy = 0;
 public:
 	void Init(const char* textureName)
@@ -15,15 +14,11 @@ public:
 		texture.loadFromFile(textureName);
 		sprite.setTexture(texture);
 		sprite.setPosition(posx, posy);
-
-		dir = 1;
 	};
 	
-	void Update(float frameTime,int num){};
+	virtual void Update(float frameTime, int num){};
 	void Render(sf::RenderWindow &window)
 	{
-		
-
 		window.draw(sprite);
 	}
 	int getPosx() {
