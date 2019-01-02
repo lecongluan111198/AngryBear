@@ -1,4 +1,6 @@
 #pragma once
+#include <stdio.h>
+#include <string.h>
 #pragma region DEFINE
 #define WINDOWS_W	500
 #define WINDOWS_H	600
@@ -33,4 +35,5 @@
 
 #define ENEMY_COUNT 7
 #pragma endregion
+
 

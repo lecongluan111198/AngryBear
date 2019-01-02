@@ -27,6 +27,8 @@ int main(int argc, char** argv)
 	while (window.isOpen())
 	{
 		Event event;
+		// A microsecond is 1/1,000,000th of a second, 1000 microseconds == 1 millisecond
+		float dt = clock.getElapsedTime().asMicroseconds() * 1.0f / 1000000;
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
@@ -39,11 +41,17 @@ int main(int argc, char** argv)
 				num = 73;
 			if (Keyboard::isKeyPressed(Keyboard::Down))
 				num = 74;
+			if (Mouse::isButtonPressed(Mouse::Left))
+			{
+				// transform the mouse position from window coordinates to world coordinates
+				sf::Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+				GameManager::getInstance()->UpdateColor(dt, mouse);
+			}
 		}
 
 		elapsed = clock.getElapsedTime();
-		// A microsecond is 1/1,000,000th of a second, 1000 microseconds == 1 millisecond
-		float dt = clock.getElapsedTime().asMicroseconds() * 1.0f / 1000000;
+	
+		
 		//std::cout << "dt: " << dt << std::endl;
 		// Start the countdown over.  Think of laps on a stop watch.
 		clock.restart();

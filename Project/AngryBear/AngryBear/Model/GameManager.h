@@ -26,6 +26,15 @@ public:
 		player.Render(window);
 
 	}
+	void UpdateColor(float dt, Vector2f mouse) {
+		sf::FloatRect bounds = player.getSpite().getGlobalBounds();
+
+		
+		if (bounds.contains(mouse))
+		{
+			player.UpdateColor(dt);
+		}
+	}
 
 	static GameManager* getInstance()
 	{

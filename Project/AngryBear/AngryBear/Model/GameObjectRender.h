@@ -10,6 +10,7 @@ protected:
 	int dir = 0;
 	int posx = 0, posy = 0;
 public:
+	
 	void Init(const char* textureName)
 	{
 		texture.loadFromFile(textureName);
@@ -38,4 +39,5 @@ public:
 	void setPosy(int pos_y) {
 		posy = pos_y;
 	}
+	
 };

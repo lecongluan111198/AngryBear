@@ -7,7 +7,7 @@
 using namespace sf;
 class Player : public GameObjectRender {
 private:
-	int m_color;
+	int m_color = 1;
 public:
 	void Init(const char* textureName) override
 	{
@@ -53,7 +53,20 @@ public:
 
 		sprite.setPosition(posx, posy);
 	};
+	void UpdateColor(float dt) {
+		m_color++;
+		if (m_color > 3)
+			m_color = 0;
+
+		/*texture.loadFromFile(color[m_color]);
+		sprite.setTexture(texture);
+		sprite.setPosition(posx, posy);*/
+		
+	};
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };
+	Sprite getSpite() {
+		return sprite;
+	}
 
 };
