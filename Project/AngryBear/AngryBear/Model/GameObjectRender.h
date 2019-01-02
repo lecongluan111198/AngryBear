@@ -15,6 +15,13 @@ public:
 		texture.loadFromFile(textureName);
 		sprite.setTexture(texture);
 		sprite.setPosition(posx, posy);
+
+		sf::Vector2f targetSize(500.0f, 600.0f);
+
+		sprite.setScale(
+			targetSize.x / sprite.getLocalBounds().width,
+			targetSize.y / sprite.getLocalBounds().height);
+
 		dir = 1;
 	};
 	

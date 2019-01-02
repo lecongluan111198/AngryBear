@@ -11,7 +11,7 @@ private:
 public:
 	void Init(const char* textureName = "")
 	{
-		player.Init(TEXTURE_PLAYER);
+		player.Init(TEXTURE_BG);
 	}
 	void Update(float dt)
 	{
