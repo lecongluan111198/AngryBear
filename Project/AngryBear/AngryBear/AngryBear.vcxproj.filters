@@ -21,5 +21,9 @@
     <ClInclude Include="State\GamePlayState.h" />
     <ClInclude Include="State\GameOverState.h" />
     <ClInclude Include="State\StateManager.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AngryBear.rc" />
   </ItemGroup>
 </Project>

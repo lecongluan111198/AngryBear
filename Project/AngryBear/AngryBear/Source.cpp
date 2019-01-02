@@ -23,6 +23,7 @@ int main(int argc, char** argv)
 
 	Clock clock;
 	Time elapsed;
+	int num = 0;
 	while (window.isOpen())
 	{
 		Event event;
@@ -30,6 +31,14 @@ int main(int argc, char** argv)
 		{
 			if (event.type == Event::Closed)
 				window.close();
+			if (Keyboard::isKeyPressed(Keyboard::Left))
+				num = 71;
+			if (Keyboard::isKeyPressed(Keyboard::Right))
+				num = 72;
+			if (Keyboard::isKeyPressed(Keyboard::Up))
+				num = 73;
+			if (Keyboard::isKeyPressed(Keyboard::Down))
+				num = 74;
 		}
 
 		elapsed = clock.getElapsedTime();
@@ -40,8 +49,8 @@ int main(int argc, char** argv)
 		clock.restart();
 
 		// ================================ Update ================================ 
-		GameManager::getInstance()->Update(dt);
-
+		GameManager::getInstance()->Update(dt,num);
+		num = 0;
 		// ================================ Draw ================================ 
 		window.clear();
 		GameManager::getInstance()->Render(window);

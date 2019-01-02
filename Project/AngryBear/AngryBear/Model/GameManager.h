@@ -13,9 +13,9 @@ public:
 	{
 		player.Init(TEXTURE_BG);
 	}
-	void Update(float dt)
+	void Update(float dt,int num)
 	{
-		player.Update(dt);
+		player.Update(dt,num);
 	}
 	void Render(sf::RenderWindow &window)
 	{
