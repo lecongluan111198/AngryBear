@@ -1,0 +1,3 @@
+﻿  Source.cpp
+c:\angrybear\project\angrybear\angrybear\model\gameobjectrender.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  AngryBear.vcxproj -> C:\AngryBear\Project\AngryBear\Debug\AngryBear.exe
