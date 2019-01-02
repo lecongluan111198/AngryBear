@@ -1,16 +1,19 @@
 #pragma once
 #include "Player.h"
+#include "Background.h"
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
 class GameManager
 {
 private:
 	Player player;
+	Background bacground;
 	static GameManager* s_Instance;
 
 public:
 	void Init(const char* textureName = "")
 	{
+		bacground.Init(TEXTURE_BG);
 		player.Init(TEXTURE_BG);
 	}
 	void Update(float dt,int num)
@@ -19,7 +22,7 @@ public:
 	}
 	void Render(sf::RenderWindow &window)
 	{
-		
+		bacground.Render(window);
 		player.Render(window);
 
 	}
