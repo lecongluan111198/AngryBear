@@ -1,6 +1,0 @@
-﻿  Source.cpp
-c:\angrybear\project\angrybear\angrybear\model\gameobjectrender.h(17): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\angrybear\project\angrybear\angrybear\model\player.h(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\angrybear\project\angrybear\angrybear\model\player.h(54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\angrybear\project\angrybear\angrybear\model\background.h(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-sfml-graphics.lib(sfml-graphics-2.dll) : fatal error LNK1112: module machine type 'x86' conflicts with target machine type 'x64'
