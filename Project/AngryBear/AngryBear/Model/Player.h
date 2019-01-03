@@ -4,6 +4,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
+#include "Background.h"
 using namespace sf;
 class Player : public GameObjectRender {
 private:
@@ -21,33 +22,43 @@ public:
 			targetSize.x / sprite.getLocalBounds().width,
 			targetSize.y / sprite.getLocalBounds().height);
 	};
-	void Update(float frameTime,int num) override {
+	bool Update(float frameTime,int num) override {
 		switch (num) {
 		case Keyboard::Left:
 			if (posx - 50 >= MAP_BORDER_X_MIN) {
 				posx -= 50;
+				Background::m_map[m_mapx][m_mapy] = 0;
+				m_mapx--;
 			}
 			break;
 		case Keyboard::Right:
 			
 			if (posx + 100 <= MAP_BORDER_X_MAX) {
 				posx += 50;
+				Background::m_map[m_mapx][m_mapy] = 0;
+				m_mapx++;
 			}
 			break;
 		case Keyboard::Up:
 			if (posy - 50 >= MAP_BORDER_Y_MIN) {
 				posy -= 50;
+				Background::m_map[m_mapx][m_mapy] = 0;
+				m_mapy--;
 			}
 			break;
 		case Keyboard::Down:
 			if (posy + 100 <= MAP_BORDER_Y_MAX) {
 				posy += 50;
+				Background::m_map[m_mapx][m_mapy] = 0;
+				m_mapy++;
 			}
 			break;
 		default:
 			break;
 		}
+		Background::m_map[m_mapx][m_mapy] = PLAYER_ID;
 		sprite.setPosition(posx, posy);
+		return true;
 	};
 	void UpdateColor(float dt) {
 		m_color++;

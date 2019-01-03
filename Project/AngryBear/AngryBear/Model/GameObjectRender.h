@@ -8,6 +8,7 @@ protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	int posx = 0, posy = 0;
+	int m_mapx, m_mapy;
 public:
 	
 	void Init(const char* textureName)
@@ -17,7 +18,7 @@ public:
 		sprite.setPosition(posx, posy);
 	};
 	
-	virtual void Update(float frameTime, int num){};
+	virtual bool Update(float frameTime, int num) { return false; };
 	void Render(sf::RenderWindow &window)
 	{
 		window.draw(sprite);
@@ -34,5 +35,19 @@ public:
 	void setPosy(int pos_y) {
 		posy = pos_y;
 	}
-	
+
+
+	int getM_mapx() {
+		return m_mapx;
+	}
+	void setM_mapx(int M_mapx) {
+		m_mapx = M_mapx;
+	}
+	int getM_mapy() {
+		return m_mapy;
+	}
+	void setM_mapy(int M_mapy) {
+		m_mapy = M_mapy;
+	}
+
 };

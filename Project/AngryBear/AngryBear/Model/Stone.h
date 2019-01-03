@@ -25,33 +25,44 @@ public:
 			targetSize.y / sprite.getLocalBounds().height);
 	};
 
-	void Update(float frameTime, int num){
+	bool Update(float frameTime, int num){
+		bool flat = false;
 		switch (num) {
 		case Keyboard::Left:
 			if (posx - 50 >= MAP_BORDER_X_MIN) {
 				posx -= 50;
+				m_mapx--;
+				flat = true;
 			}
 			break;
 		case Keyboard::Right:
 
 			if (posx + 100 <= MAP_BORDER_X_MAX) {
 				posx += 50;
+				m_mapx++;
+				flat = true;
 			}
 			break;
 		case Keyboard::Up:
 			if (posy - 50 >= MAP_BORDER_Y_MIN) {
 				posy -= 50;
+				m_mapy--;
+				flat = true;
 			}
 			break;
 		case Keyboard::Down:
 			if (posy + 100 <= MAP_BORDER_Y_MAX) {
 				posy += 50;
+				m_mapy++;
+				flat = true;
 			}
 			break;
 		default:
 			break;
 		}
 		sprite.setPosition(posx, posy);
+
+		return flat;
 	};
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };

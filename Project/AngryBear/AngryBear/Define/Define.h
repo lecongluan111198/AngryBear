@@ -34,6 +34,11 @@
 #define MAP_BORDER_Y_MAX 600
 
 #define ENEMY_COUNT 7
+
+
+#define PLAYER_ID 1
+#define MAX_MAP_COL 10
+#define MAX_MAP_ROW 12
 #pragma endregion
 
 

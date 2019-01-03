@@ -9,12 +9,11 @@ protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	int posx = 0, posy = 0;
-	static vector<vector<int>> m_map;
+	
 	
 public:
-	Background() {
-		
-	}
+	static vector<vector<int>> m_map;
+
 	void Init(const char* textureName)
 	{
 		texture.loadFromFile(textureName);
@@ -29,15 +28,15 @@ public:
 
 	};
 
-	void Update(float frameTime, int num) {};
+	bool Update(float frameTime, int num) { return true; };
 	void Render(sf::RenderWindow &window)
 	{
 		window.draw(sprite);
 	}
 	static void resizeMap() {
-		m_map.resize(5, vector<int>());
-		for (int i = 0; i < 5; i++) {
-			m_map[i].resize(5, 0);
+		m_map.resize(10, vector<int>());
+		for (int i = 0; i < 10; i++) {
+			m_map[i].resize(12, 0);
 		}
 	 }
 	static void setPos(int x, int y, int type) {
@@ -45,5 +44,7 @@ public:
 	}
 
 };
+
+vector<vector<int>> Background::m_map = vector<vector<int>>();
 
 
