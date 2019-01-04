@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
+#include "ResourceManager.h"
 #include <iostream>
 using namespace std;
 
@@ -14,28 +15,29 @@ class GameManager
 private:
 	Player player;
 	Background bacground;
-	std::vector<Stone> stoneEnemy;
+	vector<Stone> stoneEnemy;
+	vector<UnableMovingRock> unRock;
+	vector<AbleMovingRock> Rock;
+
+	int m_level = 0;
 	static GameManager* s_Instance;
-	GameManager() {
-		stoneEnemy.resize(1);
-	}
+
 public:
 	void Init(const char* textureName = "")
 	{
-		//test
-		Background::resizeMap();
-		Background::m_map[player.getM_mapx()][player.getM_mapy()] = PLAYER_ID;
+		//get date from the level
+		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, m_level);
 
-		//
 		bacground.Init(TEXTURE_BG);
-		player.Init(TEXTURE_BG);
+		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor())); //set image depend on color of player
 		for (int i = 0; i < stoneEnemy.size(); i++) {
-			stoneEnemy[i].Init(TEXTURE_PLAYER);
-			//test
-			stoneEnemy[i].setM_mapx(2);
-			stoneEnemy[i].setM_mapy(2);
-			//
+			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor())); //set image depend on color of stone
 		}
+
+		//init for other enemy
+		/*
+		Todo here
+		*/
 	}
 	void Update(float dt,int num)
 	{
@@ -44,20 +46,18 @@ public:
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			int x = stoneEnemy[i].getM_mapx();
 			int y = stoneEnemy[i].getM_mapy();
-			printf("%d %d\t %d %d\n", x, y, player.getM_mapx(), player.getM_mapy());
-			//printf("%d %d %d %d\n", player.getPosx(), player.getPosy(), Background::m_map.size(), Background::m_map[0].size());
+			printf("%d %d\t %d %d\n", x, y, player.getPosx(), player.getPosy());
 			if ((x + 1 < MAX_MAP_COL && Background::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && Background::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
 				(y + 1 < MAX_MAP_ROW && Background::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && Background::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
 				if (stoneEnemy[i].Update(dt, num)) {
 					player.Update(dt, num);
-
+					
 				}
-			}
-			else {
 				flat = 0;
 			}
+			
 		}
-		if(flat == 0)
+		if(flat == 1)
 			player.Update(dt, num);
 		
 	}

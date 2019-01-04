@@ -4,6 +4,7 @@
 #include <ctime> 
 #include <iostream>
 #include "Model/GameManager.h"
+#include "Model/ResourceManager.h"
 #include "SFML/Graphics.hpp"
 #include "Define/Define.h"
 using namespace sf;
@@ -19,6 +20,14 @@ int main(int argc, char** argv)
 	window.setFramerateLimit(FPS_LIMIT);
 
 	// ============================ Init ============================
+
+
+	//test
+	ResourceManager::getInstance()->Init();
+	ResourceManager::getInstance()->loadData();
+	//
+
+
 	GameManager::getInstance()->Init();
 
 	Clock clock;

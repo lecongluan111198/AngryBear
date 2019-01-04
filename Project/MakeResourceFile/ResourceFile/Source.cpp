@@ -20,142 +20,6 @@ struct point {
 	int x, y;
 };
 
-//void WriteResourceFile() {
-//
-//	char LevelPath[][50] = {
-//	"asdasdasd",
-//	"adasdasdsa"
-//	};
-//	char player[][50] = {
-//		"asdasda",
-//		"asdasdasdas"
-//	};
-//	stone Stonepath[4];
-//
-//	char UnrockPath[][50] = {
-//		"asdasda",
-//		"asdasdasdas"
-//	};
-//	char RockPath[][50] = {
-//		"asdasda",
-//		"asdasdasdas"
-//	};
-//	char key[50] = "asdasdasd";
-//	char supperStone[50] = "asdasdadas";
-//
-//	Stonepath[0].color = 1;
-//	strcpy(Stonepath[0].path, "asdasda");
-//	Stonepath[1].color = 1;
-//	strcpy(Stonepath[1].path, "asdasda");
-//	Stonepath[2].color = 1;
-//	strcpy(Stonepath[2].path, "asdasda");
-//	Stonepath[3].color = 1;
-//	strcpy(Stonepath[3].path, "asdasda");
-//	fstream f;
-//	f.open("FileResource.bin", ios::out, ios::binary);
-//
-//	//write level path
-//	f.write("#LEVEL 1", 20);
-//	f.write((char *)LevelPath, sizeof(LevelPath));
-//
-//	//write player path
-//	f.write("#PLAYER 4", 20);
-//	f.write((char *)player, sizeof(player));
-//
-//	//write stone path
-//	f.write("#STONE 4", 20);
-//	f.write((char *)Stonepath, sizeof(Stonepath));
-//
-//	//write unrock path
-//	f.write("#UNROCK 4", 20);
-//	f.write((char *)UnrockPath, sizeof(UnrockPath));
-//
-//	//write rock path
-//	f.write("#ROCK 4", 20);
-//	f.write((char *)RockPath, sizeof(RockPath));
-//
-//	//write key path
-//	f.write("#KEY 1", 20);
-//	f.write((char *)key, sizeof(key));
-//
-//	//write supper stone path
-//	f.write("#SUPPERSTONE 1", 20);
-//	f.write((char *)supperStone, sizeof(supperStone));
-//
-//	f.close();
-//}
-
-//void WriteLevelFile() {
-//	pointforstone StonePoint[4];
-//	point *player = new point;
-//	point lava[4];
-//	point unrock[4];
-//	point rock[4];
-//	
-//	StonePoint[0].color = 1;
-//	StonePoint[0].x = 10;
-//	StonePoint[0].y = 10;
-//
-//	StonePoint[1].color = 2;
-//	StonePoint[1].x = 10;
-//	StonePoint[1].y = 10;
-//
-//	StonePoint[2].color = 3;
-//	StonePoint[2].x = 10;
-//	StonePoint[3].y = 10;
-//
-//	StonePoint[3].color = 4;
-//	StonePoint[3].x = 10;
-//	StonePoint[3].y = 10;
-//
-//	player->x = 10;
-//	player->y = 10;
-//
-//	lava[0].x = 10; lava[0].y = 10;
-//	lava[1].x = 10; lava[1].y = 10;
-//	lava[2].x = 10; lava[2].y = 10;
-//	lava[3].x = 10; lava[3].y = 10;
-//
-//	unrock[0].x = 10; unrock[0].y = 10;
-//	unrock[1].x = 10; unrock[1].y = 10;
-//	unrock[2].x = 10; unrock[2].y = 10;
-//	unrock[3].x = 10; unrock[3].y = 10;
-//
-//	rock[0].x = 10; rock[0].y = 10;
-//	rock[1].x = 10; rock[1].y = 10;
-//	rock[2].x = 10; rock[2].y = 10;
-//	rock[3].x = 10; rock[3].y = 10;
-//
-//	fstream f;
-//	f.open("FileResource.bin", ios::out, ios::binary);
-//
-//	//write level path
-//	f.write("#STONE 4", 20);
-//	f.write((char *)StonePoint, sizeof(StonePoint));
-//
-//	//write lava path
-//	f.write("#LAVA 4", 20);
-//	f.write((char *)lava, sizeof(lava));
-//
-//	//write unrock path
-//	f.write("#UNROCK 4", 20);
-//	f.write((char *)rock, sizeof(rock));
-//
-//	//write rock path
-//	f.write("#ROCK 4", 20);
-//	f.write((char *)StonePoint, sizeof(StonePoint));
-//
-//	//write player path
-//	f.write("#PLAYER", 20);
-//	f.write((char *)player, sizeof(player));
-//
-//	//write key path
-//	f.write("#KEY 1", 20);
-//	char key[20] = "STONEID 1";
-//	f.write(key, sizeof(key));
-//
-//	f.close();
-//}
 
 void WriteResourceFile() {
 	LPSTR Path = NULL;
@@ -238,30 +102,88 @@ void WriteResourceFile() {
 
 
 }
-int main() {
+
+void WriteLevelFile() {
 	LPSTR Path = NULL;
 	Path = new CHAR[255];
 	GetCurrentDirectory(255, Path);
 
 	strcat(Path, "\\");
-	strcat(Path, "FileResource.ini");
+	strcat(Path, "level1.ini");
+	vector<string> levelpath;
+	char POSXK[6] = "PosX1";
+	char POSYK[6] = "PosY1";
+	char COLORK[7] = "Color1";
 
-	map<int, char[100]> m_Level;
-	//get level
-	int nLevel = GetPrivateProfileInt("LEVEL", "Quantity", 0, Path);
-	const int BUFFERSIZE = 255;
-	char tempPath[BUFFERSIZE] = "";
+	//player
+	char data[10];
+	WritePrivateProfileString("PLAYER", "PosX", std::to_string(0).c_str(), Path);
+	WritePrivateProfileString("PLAYER", "PosY", std::to_string(0).c_str(), Path);
+	WritePrivateProfileString("PLAYER", "Color", std::to_string(1).c_str(), Path);
 
-	char K[3] = "L1";
-	for (int i = 0; i < nLevel; i++) {
-		K[1] = i + 1 + 48;
-		GetPrivateProfileStringA("LEVEL", K, "", tempPath, BUFFERSIZE, Path);
-		if (strcmp(tempPath, "") != 0) {
-			strcpy(m_Level[i], tempPath);
-			strcpy(tempPath, "");
-		}
+	//stone
+	WritePrivateProfileString("STONE", "Quantity", std::to_string(2).c_str(), Path);
+	for (int i = 0; i < 2; i++)
+	{
+		POSXK[4] = i + 1 + 48;
+		POSYK[4] = i + 1 + 48;
+		COLORK[5] = i + 1 + 48;
+		WritePrivateProfileString("STONE", POSXK, std::to_string((i + 1) * 100).c_str(), Path);
+		WritePrivateProfileString("STONE", POSYK, std::to_string((i + 1) * 100).c_str(), Path);
+		WritePrivateProfileString("STONE", COLORK, std::to_string(1).c_str(), Path);
 	}
-	//WriteLevelFile();
+
+	//unablemovingrock
+	WritePrivateProfileString("UNABLEMOVINGROCK", "Quantity", std::to_string(0).c_str(), Path);
+	for (int i = 0; i < 0; i++)
+	{
+		POSXK[4] = i + 1 + 48;
+		POSYK[4] = i + 1 + 48;
+		COLORK[5] = i + 1 + 48;
+		WritePrivateProfileString("UNABLEMOVINGROCK", POSXK, std::to_string(100).c_str(), Path);
+		WritePrivateProfileString("UNABLEMOVINGROCK", POSYK, std::to_string(100).c_str(), Path);
+	}
+
+	//ablemovingrock
+	WritePrivateProfileString("ABLEMOVINGROCK", "Quantity", std::to_string(0).c_str(), Path);
+	for (int i = 0; i < 0; i++)
+	{
+		POSXK[4] = i + 1 + 48;
+		POSYK[4] = i + 1 + 48;
+		COLORK[5] = i + 1 + 48;
+		WritePrivateProfileString("ABLEMOVINGROCK", POSXK, std::to_string(100).c_str(), Path);
+		WritePrivateProfileString("ABLEMOVINGROCK", POSYK, std::to_string(100).c_str(), Path);
+	}
+
+	//key
+	WritePrivateProfileString("KEY", "StoneID", std::to_string(0).c_str(), Path);
+
+
+}
+int main() {
+	//LPSTR Path = NULL;
+	//Path = new CHAR[255];
+	//GetCurrentDirectory(255, Path);
+
+	//strcat(Path, "\\");
+	//strcat(Path, "FileResource.ini");
+
+	//map<int, char[100]> m_Level;
+	////get level
+	//int nLevel = GetPrivateProfileInt("LEVEL", "Quantity", 0, Path);
+	//const int BUFFERSIZE = 255;
+	//char tempPath[BUFFERSIZE] = "";
+
+	//char K[3] = "L1";
+	//for (int i = 0; i < nLevel; i++) {
+	//	K[1] = i + 1 + 48;
+	//	GetPrivateProfileStringA("LEVEL", K, "", tempPath, BUFFERSIZE, Path);
+	//	if (strcmp(tempPath, "") != 0) {
+	//		strcpy(m_Level[i], tempPath);
+	//		strcpy(tempPath, "");
+	//	}
+	//}
+	WriteLevelFile();
 	//WriteResourceFile();
 	system("pause");
 }

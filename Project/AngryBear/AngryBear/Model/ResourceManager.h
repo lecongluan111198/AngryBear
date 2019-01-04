@@ -13,6 +13,7 @@
 #include "AbleMovingRock.h"
 #include "Stone.h"
 #include "Player.h"
+#include "Background.h"
 #include "SFML/Graphics.hpp"
 using namespace std;
 using namespace sf;
@@ -22,19 +23,35 @@ private:
 	static ResourceManager* s_Instance;
 	string m_dataFolderPath;
 	map<int, char[100]> m_Level;//all link to each level
-	map<int, char[100]> m_PlayerImage;
-	map<int, char[100]> m_StoneImage;
+	map<int, char*> m_PlayerImage;
+	map<int, char*> m_StoneImage;
 	map<int, char[100]> m_UnRockImage;
 	map<int, char[100]> m_RockImage;
 	map<int, char[100]> m_SupperStoneImage;
 	static ResourceManager* s_instance;
 
 public:
+	~ResourceManager() {
+		for (map<int, char*>::iterator it = m_PlayerImage.begin(); it != m_PlayerImage.end(); it++) {
+			delete it->second;
+		}
+
+		for (map<int, char*>::iterator it = m_StoneImage.begin(); it != m_StoneImage.end(); it++) {
+			delete it->second;
+		}
+
+		delete s_instance;
+	}
 	static ResourceManager* getInstance();
 	void Init();
-	void loadData(const char *dataPath = ROOTFOLDER);
-	void loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, int levelID = 0);
-	char* getImageID(int ID);
+	void loadData();
+	void loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, int levelID = 1);
+	char* getPlayerImage(int ID);
+	char* getStoneImage(int ID);
+	char* getUnRockImage(int ID);
+	char* getRockImage(int ID);
+	char* getSupperStoneImage(int ID);
+
 	char* getLevelID(int ID);
 };
 
@@ -50,21 +67,25 @@ void ResourceManager::Init() {
 	m_dataFolderPath = ROOTFOLDER;
 }
 
-void ResourceManager::loadData(const char *dataPath = ROOTFOLDER) {
+void ResourceManager::loadData() {
 	LPSTR Path = NULL;
 	Path = new CHAR[255];
 	GetCurrentDirectory(255, Path);
 
-	strcat(Path, "\\");
-	strcat(Path, "FileResource.ini");
+	strcat(Path, "\\resources\\");
+	strcat(Path, m_dataFolderPath.c_str());
 
 	const int BUFFERSIZE = 255;
 	char tempPath[BUFFERSIZE] = "";
 	char K[3] = "K1";
+	
+	//get size of map
+
+	Background::resizeMap();
 
 	//get level
-	int nLevel = GetPrivateProfileInt("LEVEL", "Quantity", 0, Path);
-	for (int i = 0; i < nLevel; i++) {
+	int quantity = GetPrivateProfileInt("LEVEL", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
 		K[1] = i + 1 + 48;
 		GetPrivateProfileStringA("LEVEL", K, "", tempPath, BUFFERSIZE, Path);
 		if (strcmp(tempPath, "") != 0) {
@@ -73,28 +94,36 @@ void ResourceManager::loadData(const char *dataPath = ROOTFOLDER) {
 		}
 	}
 	//get player
-	int nLevel = GetPrivateProfileInt("PLAYER", "Quantity", 0, Path);
-	for (int i = 0; i < nLevel; i++) {
+	quantity = GetPrivateProfileInt("PLAYER", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
 		K[1] = i + 1 + 48;
 		GetPrivateProfileStringA("PLAYER", K, "", tempPath, BUFFERSIZE, Path);
 		if (strcmp(tempPath, "") != 0) {
+			m_PlayerImage[i] = new char[100];
 			strcpy(m_PlayerImage[i], tempPath);
 			strcpy(tempPath, "");
+		/*	Texture t;
+			t.loadFromFile(tempPath);
+			m_PlayerImage[i] = t;*/
 		}
 	}
 	//get stone
-	int nLevel = GetPrivateProfileInt("STONE", "Quantity", 0, Path);
-	for (int i = 0; i < nLevel; i++) {
+	quantity = GetPrivateProfileInt("STONE", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
 		K[1] = i + 1 + 48;
 		GetPrivateProfileStringA("STONE", K, "", tempPath, BUFFERSIZE, Path);
 		if (strcmp(tempPath, "") != 0) {
+			m_StoneImage[i] = new char[100];
 			strcpy(m_StoneImage[i], tempPath);
 			strcpy(tempPath, "");
+			/*Texture t;
+			t.loadFromFile(tempPath);
+			m_StoneImage[i] = t;*/
 		}
 	}
 	//get unablemovingrock
-	int nLevel = GetPrivateProfileInt("UNABLEMOVINGROCK", "Quantity", 0, Path);
-	for (int i = 0; i < nLevel; i++) {
+	quantity = GetPrivateProfileInt("UNABLEMOVINGROCK", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
 		K[1] = i + 1 + 48;
 		GetPrivateProfileStringA("UNABLEMOVINGROCK", K, "", tempPath, BUFFERSIZE, Path);
 		if (strcmp(tempPath, "") != 0) {
@@ -103,8 +132,8 @@ void ResourceManager::loadData(const char *dataPath = ROOTFOLDER) {
 		}
 	}
 	//get ablemovingrock
-	int nLevel = GetPrivateProfileInt("ABLEMOVINGROCK", "Quantity", 0, Path);
-	for (int i = 0; i < nLevel; i++) {
+	quantity = GetPrivateProfileInt("ABLEMOVINGROCK", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
 		K[1] = i + 1 + 48;
 		GetPrivateProfileStringA("ABLEMOVINGROCK", K, "", tempPath, BUFFERSIZE, Path);
 		if (strcmp(tempPath, "") != 0) {
@@ -113,8 +142,8 @@ void ResourceManager::loadData(const char *dataPath = ROOTFOLDER) {
 		}
 	}
 	//get supperstone
-	int nLevel = GetPrivateProfileInt("SUPPERSTONE", "Quantity", 0, Path);
-	for (int i = 0; i < nLevel; i++) {
+	quantity = GetPrivateProfileInt("SUPPERSTONE", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
 		K[1] = i + 1 + 48;
 		GetPrivateProfileStringA("SUPPERSTONE", K, "", tempPath, BUFFERSIZE, Path);
 		if (strcmp(tempPath, "") != 0) {
@@ -125,12 +154,12 @@ void ResourceManager::loadData(const char *dataPath = ROOTFOLDER) {
 
 }
 
-void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player,int levelID = 0) {
+void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, int levelID) {
 	LPSTR Path = NULL;
 	Path = new CHAR[255];
 	GetCurrentDirectory(255, Path);
 
-	strcat(Path, "\\");
+	strcat(Path, "\\resources\\");
 	strcat(Path, m_Level[levelID]);
 
 	const int BUFFERSIZE = 255;
@@ -147,6 +176,9 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	player.setPosx(posx);
 	player.setPosy(posy);
 	player.setColor(color);
+	player.setM_mapx(posx / CHARACTER_W);
+	player.setM_mapy(posy / CHARACTER_H);
+	Background::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = PLAYER_ID; //update to 2D-array map 
 
 	//get stone
 	quantity = GetPrivateProfileInt("STONE", "Quantity", 0, Path);
@@ -154,6 +186,7 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	char POSXK[6] = "PosX1";
 	char POSYK[6] = "PosY1";
 	char COLORK[7] = "Color1";
+
 	for (int i = 0; i < quantity; i++) {
 		POSXK[4] = i + 1 + 48;
 		POSYK[4] = i + 1 + 48;
@@ -161,9 +194,14 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 		posx = GetPrivateProfileInt("STONE", POSXK, 0, Path);
 		posy = GetPrivateProfileInt("STONE", POSYK, 0, Path);
 		color = GetPrivateProfileInt("STONE", COLORK, 1, Path);
+
 		tempStone.setPosx(posx);
 		tempStone.setPosy(posy);
 		tempStone.setColor(color);
+		tempStone.setM_mapx(posx / CHARACTER_W);
+		tempStone.setM_mapy(posy / CHARACTER_H);
+		Background::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = color; //color == STONE_ID
+
 		stone.push_back(tempStone);
 	}
 
@@ -178,6 +216,10 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	
 		tempUnRock.setPosx(posx);
 		tempUnRock.setPosy(posy);
+		tempUnRock.setM_mapx(posx / CHARACTER_W);
+		tempUnRock.setM_mapy(posy / CHARACTER_H);
+		Background::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = UNABLEMOVINGROCK_ID;
+
 		unRock.push_back(tempUnRock);
 	}
 
@@ -192,14 +234,57 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 
 		tempRock.setPosx(posx);
 		tempRock.setPosy(posy);
+		tempRock.setM_mapx(posx / CHARACTER_W);
+		tempRock.setM_mapy(posy / CHARACTER_H);
+		Background::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = ABLEMOVINGROCK_ID;
+
 		Rock.push_back(tempRock);
 	}
 
 	//get key
-	int key = GetPrivateProfileInt("KEY", "STONEID", 0, Path);
-	stone[key - 1].setIsKey(true);
+	int key = GetPrivateProfileInt("KEY", "StoneID", 0, Path);
+	stone[key].setIsKey(true);
 }
 
+char* ResourceManager::getPlayerImage(int ID) {
+	if (m_PlayerImage.find(ID) != m_PlayerImage.end())
+	{
+		return m_PlayerImage[ID];
+	}
+	return NULL;
+}
+
+char* ResourceManager::getStoneImage(int ID) {
+	if (m_StoneImage.find(ID) != m_StoneImage.end())
+	{
+		return m_StoneImage[ID];
+	}
+	return NULL;
+}
+
+char* ResourceManager::getUnRockImage(int ID) {
+	if (m_UnRockImage.find(ID) != m_UnRockImage.end())
+	{
+		return m_UnRockImage[ID];
+	}
+	return NULL;
+}
+
+char* ResourceManager::getRockImage(int ID) {
+	if (m_RockImage.find(ID) != m_RockImage.end())
+	{
+		return m_RockImage[ID];
+	}
+	return NULL;
+}
+
+char* ResourceManager::getSupperStoneImage(int ID) {
+	if (m_SupperStoneImage.find(ID) != m_SupperStoneImage.end())
+	{
+		return m_SupperStoneImage[ID];
+	}
+	return NULL;
+}
 
 char* ResourceManager::getLevelID(int ID) {
 	if (m_Level.find(ID) != m_Level.end())

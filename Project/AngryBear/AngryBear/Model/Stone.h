@@ -8,10 +8,6 @@ private:
 	int m_color;
 	bool m_isKey;
 public:
-	Stone() {
-		posx = 100;
-		posy = 100;
-	}
 	void Init(const char* textureName) override
 	{
 		texture.loadFromFile(textureName);
@@ -24,6 +20,17 @@ public:
 			targetSize.x / sprite.getLocalBounds().width,
 			targetSize.y / sprite.getLocalBounds().height);
 	};
+	void test(Texture t) {
+		texture = t;
+		sprite.setTexture(texture);
+		sprite.setPosition(posx, posy);
+
+		sf::Vector2f targetSize(50.0f, 50.0f);
+
+		sprite.setScale(
+			targetSize.x / sprite.getLocalBounds().width,
+			targetSize.y / sprite.getLocalBounds().height);
+	}
 
 	bool Update(float frameTime, int num){
 		bool flat = false;
