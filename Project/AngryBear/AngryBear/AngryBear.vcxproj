@@ -26,6 +26,8 @@
     <ClInclude Include="Model\GameManager.h" />
     <ClInclude Include="Model\GameObject.h" />
     <ClInclude Include="Model\GameObjectRender.h" />
+    <ClInclude Include="Model\GameState\State.h" />
+    <ClInclude Include="Model\GameState\StateMachine.h" />
     <ClInclude Include="Model\Player.h" />
     <ClInclude Include="Model\ResourceManager.h" />
     <ClInclude Include="Model\Stone.h" />
