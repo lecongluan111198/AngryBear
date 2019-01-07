@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #pragma once
 #include "GameObjectRender.h"
 #include <iostream>
@@ -9,6 +9,8 @@ using namespace sf;
 class Player : public GameObjectRender {
 private:
 	int m_color = 1;
+	//1: destroy hàng dọc, 2: destroy hàng ngang, 0: clear
+	int m_onDestroy = 0;
 public:
 	void Init(const char* textureName) override
 	{
@@ -41,9 +43,10 @@ public:
 				posx -= 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapx--;
-				if (m_mapy - 1 >= 0&&Background::m_map[m_mapx][m_mapy-1] !=0 && Background::m_map[m_mapx][m_mapy - 1] < 4) {
-					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] != 0 && Background::m_map[m_mapx][m_mapy + 1] < 4)
-						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				if (m_mapy - 1 >= 0&&Background::m_map[m_mapx][m_mapy-1] == m_color) {
+					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] == m_color)
+						//destroy the hang doc
+						m_onDestroy = 1;
 				}
 			}
 			break;
@@ -53,9 +56,10 @@ public:
 				posx += 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapx++;
-				if (m_mapy - 1 >= 0 && Background::m_map[m_mapx][m_mapy - 1] != 0 && Background::m_map[m_mapx][m_mapy - 1] <4) {
-					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] != 0 && Background::m_map[m_mapx][m_mapy + 1] < 4)
-						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				if (m_mapy - 1 >= 0 && Background::m_map[m_mapx][m_mapy - 1] == m_color) {
+					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] == m_color)
+						//destroy the hang doc
+						m_onDestroy = 1;
 				}
 			}
 			break;
@@ -64,9 +68,10 @@ public:
 				posy -= 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapy--;
-				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx-1][m_mapy] != 0 && Background::m_map[m_mapx - 1][m_mapy] < 4) {
-					if (m_mapx + 1 < 10 && Background::m_map[m_mapx+1][m_mapy] != 0 && Background::m_map[m_mapx + 1][m_mapy] < 4)
-						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx-1][m_mapy] == m_color) {
+					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] == m_color)
+						//destroy the hang ngang
+						m_onDestroy = 2;
 				}
 			}
 			break;
@@ -77,7 +82,7 @@ public:
 				m_mapy++;
 				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] != 0 && Background::m_map[m_mapx - 1][m_mapy] < 4) {
 					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] != 0 && Background::m_map[m_mapx + 1][m_mapy] < 4)
-						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+						m_onDestroy = 2;
 				}
 			}
 			break;
@@ -102,6 +107,13 @@ public:
 	void setColor(int color) { m_color = color; };
 	Sprite getSpite() {
 		return sprite;
+	}
+
+	int getDestroy() {
+		return m_onDestroy;
+	}
+	void setDestroy(int des) {
+		m_onDestroy = des;
 	}
 
 };

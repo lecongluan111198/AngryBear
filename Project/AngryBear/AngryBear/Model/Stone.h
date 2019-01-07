@@ -76,6 +76,9 @@ public:
 
 		return flat;
 	};
+	void destroy() {
+		Background::m_map[m_mapx][m_mapy] = 0;
+	}
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };
 	bool getIsKey() { return m_isKey; };
