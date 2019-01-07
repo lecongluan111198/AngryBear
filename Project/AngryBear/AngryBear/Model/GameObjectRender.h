@@ -49,5 +49,4 @@ public:
 	void setM_mapy(int M_mapy) {
 		m_mapy = M_mapy;
 	}
-
 };

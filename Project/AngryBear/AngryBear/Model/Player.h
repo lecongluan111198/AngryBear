@@ -41,6 +41,10 @@ public:
 				posx -= 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapx--;
+				if (m_mapy - 1 >= 0&&Background::m_map[m_mapx][m_mapy-1] !=0 && Background::m_map[m_mapx][m_mapy - 1] < 4) {
+					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] != 0 && Background::m_map[m_mapx][m_mapy + 1] < 4)
+						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				}
 			}
 			break;
 		case Keyboard::Right:
@@ -49,6 +53,10 @@ public:
 				posx += 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapx++;
+				if (m_mapy - 1 >= 0 && Background::m_map[m_mapx][m_mapy - 1] != 0 && Background::m_map[m_mapx][m_mapy - 1] <4) {
+					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] != 0 && Background::m_map[m_mapx][m_mapy + 1] < 4)
+						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				}
 			}
 			break;
 		case Keyboard::Up:
@@ -56,6 +64,10 @@ public:
 				posy -= 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapy--;
+				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx-1][m_mapy] != 0 && Background::m_map[m_mapx - 1][m_mapy] < 4) {
+					if (m_mapx + 1 < 10 && Background::m_map[m_mapx+1][m_mapy] != 0 && Background::m_map[m_mapx + 1][m_mapy] < 4)
+						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				}
 			}
 			break;
 		case Keyboard::Down:
@@ -63,6 +75,10 @@ public:
 				posy += 50;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapy++;
+				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] != 0 && Background::m_map[m_mapx - 1][m_mapy] < 4) {
+					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] != 0 && Background::m_map[m_mapx + 1][m_mapy] < 4)
+						printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				}
 			}
 			break;
 		default:

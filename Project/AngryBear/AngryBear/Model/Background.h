@@ -42,6 +42,7 @@ public:
 	static void setPos(int x, int y, int type) {
 		m_map[x][y] = type;
 	}
+	
 
 };
 

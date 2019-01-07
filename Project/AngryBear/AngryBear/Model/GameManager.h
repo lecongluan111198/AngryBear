@@ -59,6 +59,12 @@ public:
 		}
 		if(flat == 1)
 			player.Update(dt, num);
+
+
+
+
+		//Check collision
+		
 		
 	}
 	void Render(sf::RenderWindow &window)
