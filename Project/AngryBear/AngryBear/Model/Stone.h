@@ -36,7 +36,7 @@ public:
 		bool flat = false;
 		switch (num) {
 		case Keyboard::Left:
-			if (posx - 50 >= MAP_BORDER_X_MIN) {
+			if (posx - 50 >= MAP_BORDER_X_MIN && Background::m_map[m_mapx - 1][m_mapy] == 0) {
 				posx -= 50;
 				m_mapx--;
 				flat = true;
@@ -44,21 +44,21 @@ public:
 			break;
 		case Keyboard::Right:
 
-			if (posx + 100 <= MAP_BORDER_X_MAX) {
+			if (posx + 100 <= MAP_BORDER_X_MAX && Background::m_map[m_mapx + 1][m_mapy] == 0) {
 				posx += 50;
 				m_mapx++;
 				flat = true;
 			}
 			break;
 		case Keyboard::Up:
-			if (posy - 50 >= MAP_BORDER_Y_MIN) {
+			if (posy - 50 >= MAP_BORDER_Y_MIN && Background::m_map[m_mapx][m_mapy - 1] == 0) {
 				posy -= 50;
 				m_mapy--;
 				flat = true;
 			}
 			break;
 		case Keyboard::Down:
-			if (posy + 100 <= MAP_BORDER_Y_MAX) {
+			if (posy + 100 <= MAP_BORDER_Y_MAX && Background::m_map[m_mapx][m_mapy + 1] == 0) {
 				posy += 50;
 				m_mapy++;
 				flat = true;
