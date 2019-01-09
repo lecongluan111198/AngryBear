@@ -5,11 +5,10 @@
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
 #include "Background.h"
-#include "ResourceManager.h"
 using namespace sf;
 class Player : public GameObjectRender {
 private:
-	int m_color = 1;
+	int m_color;
 	//1: destroy hàng dọc, 2: destroy hàng ngang, 0: clear
 	int m_onDestroy = 0;
 	bool isGetKey = false;
@@ -101,13 +100,17 @@ public:
 		sprite.setPosition(posx, posy);
 		return true;
 	};
-	void UpdateColor(float dt) {
-		m_color++;
-		if (m_color >= 4)
-			m_color = 1;
-		texture.loadFromFile(ResourceManager::getInstance()->getPlayerImage(m_color));
+	void UpdateColor(float dt,char* Texture) {
+		
+		texture.loadFromFile(Texture);
 		sprite.setTexture(texture);
 	};
+	void changeColor() {
+		m_color++;
+		if (m_color > 4) {
+			m_color = 1;
+		}
+	}
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };
 	Sprite getSpite() {

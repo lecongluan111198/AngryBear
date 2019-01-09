@@ -8,12 +8,12 @@
 
 #define PLAYER_SPEED	350
 #define ROOTFOLDER		"FileResource.ini"
-#define TEXTURE_PLAYER	"resources/a2.png"
-//#define TEXTURE_ENEMY	"resources/a1.png"
+
+
 #define TEXTURE_BG		"resources/400x700.png"
 
-#define BACKGROUND_W 500 //width tuong duong voi so hang
-#define BACKGROUND_H 600 //height tuong duong voi so cot
+#define BACKGROUND_W 400 //width tuong duong voi so hang
+#define BACKGROUND_H 700 //height tuong duong voi so cot
 
 #define CHARACTER_W 50
 #define CHARACTER_H 50

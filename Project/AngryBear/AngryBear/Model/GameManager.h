@@ -29,7 +29,7 @@ public:
 		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, m_level);
 
 		bacground.Init(TEXTURE_BG);
-		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor())); //set image depend on color of player
+		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor()-1)); //set image depend on color of player
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor())); //set image depend on color of stone
 		}
@@ -49,9 +49,12 @@ public:
 			printf("%d %d\t %d %d\n", x, y, player.getPosx(), player.getPosy());
 			if ((x + 1 < MAX_MAP_COL && Background::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && Background::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
 				(y + 1 < MAX_MAP_ROW && Background::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && Background::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
-				if (stoneEnemy[i].Update(dt, num)) {
-					player.Update(dt, num);
+				if (player.getColor() == stoneEnemy[i].getColor())
+				{
+					if (stoneEnemy[i].Update(dt, num)) {
+						player.Update(dt, num);
 
+					}
 				}
 				flat = 0;
 			}
@@ -141,7 +144,8 @@ public:
 		
 		if (bounds.contains(mouse))
 		{
-			player.UpdateColor(dt);
+			player.changeColor();
+			player.UpdateColor(dt, ResourceManager::getInstance()->getPlayerImage(player.getColor()-1));
 		}
 	}
 
