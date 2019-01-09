@@ -6,7 +6,7 @@
 class Stone : public Enemy {
 private:
 	int m_color;
-	bool m_isKey;
+	bool m_isKey = false;
 public:
 	void Init(const char* textureName) override
 	{
@@ -14,13 +14,13 @@ public:
 		sprite.setTexture(texture);
 		sprite.setPosition(posx, posy);
 
-		sf::Vector2f targetSize(50.0f, 50.0f);
+		sf::Vector2f targetSize(P_SIZE, P_SIZE);
 
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,
 			targetSize.y / sprite.getLocalBounds().height);
 	};
-	void test(Texture t) {
+	/*void test(Texture t) {
 		texture = t;
 		sprite.setTexture(texture);
 		sprite.setPosition(posx, posy);
@@ -30,40 +30,40 @@ public:
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,
 			targetSize.y / sprite.getLocalBounds().height);
-	}
+	}*/
 
 	bool Update(float frameTime, int num){
 		bool flat = false;
 		switch (num) {
 		case Keyboard::Left:
-			if (posx - 50 >= MAP_BORDER_X_MIN && Background::m_map[m_mapx - 1][m_mapy] == 0) {
+			if (posx - P_SIZE >= MAP_BORDER_X_MIN && Background::m_map[m_mapx - 1][m_mapy] == 0) {
 				Background::m_map[m_mapx][m_mapy] = 0;
-				posx -= 50;
+				posx -= P_SIZE-2;
 				m_mapx--;
 				flat = true;
 			}
 			break;
 		case Keyboard::Right:
 
-			if (posx + 100 <= MAP_BORDER_X_MAX && Background::m_map[m_mapx + 1][m_mapy] == 0) {
+			if (posx + P_SIZE*2 <= MAP_BORDER_X_MAX && Background::m_map[m_mapx + 1][m_mapy] == 0) {
 				Background::m_map[m_mapx][m_mapy] = 0;
-				posx += 50;
+				posx += P_SIZE -2;
 				m_mapx++;
 				flat = true;
 			}
 			break;
 		case Keyboard::Up:
-			if (posy - 50 >= MAP_BORDER_Y_MIN && Background::m_map[m_mapx][m_mapy - 1] == 0) {
+			if (posy - P_SIZE >= MAP_BORDER_Y_MIN && Background::m_map[m_mapx][m_mapy - 1] == 0) {
 				Background::m_map[m_mapx][m_mapy] = 0;
-				posy -= 50;
+				posy -= P_SIZE;
 				m_mapy--;
 				flat = true;
 			}
 			break;
 		case Keyboard::Down:
-			if (posy + 100 <= MAP_BORDER_Y_MAX && Background::m_map[m_mapx][m_mapy + 1] == 0) {
+			if (posy + P_SIZE*2 <= MAP_BORDER_Y_MAX && Background::m_map[m_mapx][m_mapy + 1] == 0) {
 				Background::m_map[m_mapx][m_mapy] = 0;
-				posy += 50;
+				posy += P_SIZE;
 				m_mapy++;
 				flat = true;
 			}
