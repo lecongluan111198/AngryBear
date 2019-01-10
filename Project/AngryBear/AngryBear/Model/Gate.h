@@ -10,7 +10,7 @@ public:
 		sprite.setTexture(texture);
 		sprite.setPosition(posx, posy);
 
-		sf::Vector2f targetSize(P_SIZE, P_SIZE);
+		sf::Vector2f targetSize((P_SIZE-2)*3, (P_SIZE-2)*3);
 
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,

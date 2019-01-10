@@ -22,6 +22,7 @@ private:
 	vector<AbleMovingRock> Rock;
 	Gate gate;
 	Key key;
+	TimeBar timebar;
 	int m_level = 0;
 	static GameManager* s_Instance;
 
@@ -29,7 +30,7 @@ public:
 	void Init(const char* textureName = "")
 	{
 		//get date from the level
-		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player,gate, m_level);
+		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player,gate, timebar, m_level);
 
 		bacground.Init(TEXTURE_BG);
 		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor()-1)); //set image depend on color of player
@@ -37,6 +38,7 @@ public:
 			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor()-1)); //set image depend on color of stone
 		}
 		gate.Init(ResourceManager::getInstance()->getGateImage(0));
+		timebar.Init(ResourceManager::getInstance()->getTimeBarImage(0));
 		//init for other enemy
 		/*
 		Todo here
@@ -137,6 +139,9 @@ public:
 		default:
 			break;
 		}
+
+
+		timebar.Update(dt,0);
 		
 	}
 	void Render(sf::RenderWindow &window)
@@ -150,6 +155,7 @@ public:
 			gate.Render(window);
 		else
 			key.Render(window);
+		timebar.Render(window);
 	}
 	void UpdateColor(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSpite().getGlobalBounds();
