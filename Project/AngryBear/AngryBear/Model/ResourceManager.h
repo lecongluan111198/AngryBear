@@ -203,9 +203,9 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	player.setPosx(posx);
 	player.setPosy(posy);
 	player.setColor(color);
-	player.setM_mapx((posx - MAP_BORDER_X_MIN) / CHARACTER_W);
-	player.setM_mapy((posy - MAP_BORDER_Y_MIN) / CHARACTER_H);
-	Background::m_map[(posx - MAP_BORDER_X_MIN) / CHARACTER_W][(posy - MAP_BORDER_Y_MIN) / CHARACTER_H] = PLAYER_ID; //update to 2D-array map 
+	player.setM_mapx((posx - MAP_BORDER_X_MIN-P_SIZE+2) / (P_SIZE-2));
+	player.setM_mapy((posy - MAP_BORDER_Y_MIN) / P_SIZE);
+	Background::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = PLAYER_ID; //update to 2D-array map 
 
 	//get stone
 	quantity = GetPrivateProfileInt("STONE", "Quantity", 0, Path);
@@ -225,9 +225,9 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 		tempStone.setPosx(posx);
 		tempStone.setPosy(posy);
 		tempStone.setColor(color);
-		tempStone.setM_mapx((posx - MAP_BORDER_X_MIN) / CHARACTER_W +1);
-		tempStone.setM_mapy((posy - MAP_BORDER_Y_MIN) / CHARACTER_H +1);
-		Background::m_map[(posx - MAP_BORDER_X_MIN) / CHARACTER_W +1][(posy - MAP_BORDER_Y_MIN) / CHARACTER_H +1] = color; //color == STONE_ID
+		tempStone.setM_mapx((posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2));
+		tempStone.setM_mapy((posy - MAP_BORDER_Y_MIN) / P_SIZE);
+		Background::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = color; //update to 2D-array map  color; //color == STONE_ID
 
 		stone.push_back(tempStone);
 	}
