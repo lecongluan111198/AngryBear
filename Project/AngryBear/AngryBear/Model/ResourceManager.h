@@ -14,6 +14,7 @@
 #include "Stone.h"
 #include "Player.h"
 #include "Background.h"
+#include "Gate.h"
 #include "SFML/Graphics.hpp"
 using namespace std;
 using namespace sf;
@@ -28,6 +29,8 @@ private:
 	map<int, char[100]> m_UnRockImage;
 	map<int, char[100]> m_RockImage;
 	map<int, char[100]> m_SupperStoneImage;
+	map<int, char[100]> m_Key;
+	map<int, char[100]> m_Gate;
 	static ResourceManager* s_instance;
 
 public:
@@ -45,7 +48,7 @@ public:
 	static ResourceManager* getInstance();
 	void Init();
 	void loadData();
-	void loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, int levelID = 1);
+	void loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player,Gate &gate, int levelID = 1);
 	char* getPlayerImage(int ID);
 	char* getStoneImage(int ID);
 	char* getUnRockImage(int ID);
@@ -53,6 +56,8 @@ public:
 	char* getSupperStoneImage(int ID);
 
 	char* getLevelID(int ID);
+	char* getGateImage(int ID);
+	char* getKeyImage(int ID);
 };
 
 ResourceManager* ResourceManager::s_Instance = NULL;
@@ -152,9 +157,31 @@ void ResourceManager::loadData() {
 		}
 	}
 
+	//get key
+	quantity = GetPrivateProfileInt("KEY", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
+		K[1] = i + 1 + 48;
+		GetPrivateProfileStringA("KEY", K, "", tempPath, BUFFERSIZE, Path);
+		if (strcmp(tempPath, "") != 0) {
+			strcpy(m_Key[i], tempPath);
+			strcpy(tempPath, "");
+		}
+	}
+
+	//get key
+	quantity = GetPrivateProfileInt("GATE", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
+		K[1] = i + 1 + 48;
+		GetPrivateProfileStringA("GATE", K, "", tempPath, BUFFERSIZE, Path);
+		if (strcmp(tempPath, "") != 0) {
+			strcpy(m_Gate[i], tempPath);
+			strcpy(tempPath, "");
+		}
+	}
+
 }
 
-void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, int levelID) {
+void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, Gate &gate, int levelID ) {
 	LPSTR Path = NULL;
 	Path = new CHAR[255];
 	GetCurrentDirectory(255, Path);
@@ -244,6 +271,12 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	//get key
 	int key = GetPrivateProfileInt("KEY", "StoneID", 0, Path);
 	stone[key].setIsKey(true);
+
+	//gate
+	posx = GetPrivateProfileInt("GATE", "PosX", 0, Path);
+	posy = GetPrivateProfileInt("GATE", "PosY", 0, Path);
+	gate.setPosx(posx);
+	gate.setPosy(posy);
 }
 
 char* ResourceManager::getPlayerImage(int ID) {
@@ -290,6 +323,20 @@ char* ResourceManager::getLevelID(int ID) {
 	if (m_Level.find(ID) != m_Level.end())
 	{
 		return m_Level[ID];
+	}
+	return NULL;
+}
+char* ResourceManager::getGateImage(int ID) {
+	if (m_Gate.find(ID) != m_Gate.end())
+	{
+		return m_Gate[ID];
+	}
+	return NULL;
+}
+char* ResourceManager::getKeyImage(int ID) {
+	if (m_Key.find(ID) != m_Key.end())
+	{
+		return m_Key[ID];
 	}
 	return NULL;
 }

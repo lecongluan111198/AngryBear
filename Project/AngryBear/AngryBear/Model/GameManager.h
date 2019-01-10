@@ -4,9 +4,11 @@
 #include "Player.h"
 #include "Stone.h"
 #include "Background.h"
+#include "Gate.h"
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
 #include "ResourceManager.h"
+#include "Key.h"
 #include <iostream>
 using namespace std;
 
@@ -18,7 +20,8 @@ private:
 	vector<Stone> stoneEnemy;
 	vector<UnableMovingRock> unRock;
 	vector<AbleMovingRock> Rock;
-
+	Gate gate;
+	Key key;
 	int m_level = 0;
 	static GameManager* s_Instance;
 
@@ -26,14 +29,14 @@ public:
 	void Init(const char* textureName = "")
 	{
 		//get date from the level
-		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, m_level);
+		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player,gate, m_level);
 
 		bacground.Init(TEXTURE_BG);
 		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor()-1)); //set image depend on color of player
 		for (int i = 0; i < stoneEnemy.size(); i++) {
-			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor())); //set image depend on color of stone
+			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor()-1)); //set image depend on color of stone
 		}
-
+		gate.Init(ResourceManager::getInstance()->getGateImage(0));
 		//init for other enemy
 		/*
 		Todo here
@@ -88,6 +91,12 @@ public:
 					int x = stoneEnemy[j].getM_mapx();
 					int y = stoneEnemy[j].getM_mapy();
 					if (((p_y + i) < 12 && x == p_x && y == p_y + i) || (p_y - i) >= 0 && x == p_x && y == p_y - i) {
+						if (stoneEnemy[j].getIsKey()) {
+							key.setPosx((x+1)*35+45);
+							key.setPosy(y*37+150);
+							key.Init(ResourceManager::getInstance()->getKeyImage(0));
+						}
+						
 						stoneEnemy[j].destroy();
 						stoneEnemy.erase(stoneEnemy.begin() + j);
 						j--;
@@ -137,6 +146,10 @@ public:
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			stoneEnemy[i].Render(window);
 		}
+		if(player.getSetKey())
+			gate.Render(window);
+		else
+			key.Render(window);
 	}
 	void UpdateColor(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSpite().getGlobalBounds();

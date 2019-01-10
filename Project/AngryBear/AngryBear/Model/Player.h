@@ -11,7 +11,7 @@ private:
 	int m_color;
 	//1: destroy hàng dọc, 2: destroy hàng ngang, 0: clear
 	int m_onDestroy = 0;
-	bool isGetKey = false;
+	bool m_isGetKey = false;
 public:
 	void Init(const char* textureName) override
 	{
@@ -92,7 +92,7 @@ public:
 		}
 		if (Background::m_map[m_mapx][m_mapy] == KEY_ID)
 		{
-			isGetKey = true;
+			m_isGetKey = true;
 		}
 		else {
 			Background::m_map[m_mapx][m_mapy] = PLAYER_ID;
@@ -122,6 +122,9 @@ public:
 	}
 	void setDestroy(int des) {
 		m_onDestroy = des;
+	}
+	bool getSetKey() {
+		return m_isGetKey;
 	}
 
 };

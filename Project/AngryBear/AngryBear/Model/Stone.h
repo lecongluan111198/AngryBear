@@ -7,6 +7,7 @@ class Stone : public Enemy {
 private:
 	int m_color;
 	bool m_isKey = false;
+	bool m_isDestroy = false;
 public:
 	void Init(const char* textureName) override
 	{
@@ -77,11 +78,15 @@ public:
 		return flat;
 	};
 	void destroy() {
-		Background::m_map[m_mapx][m_mapy] = 0;
+		if(m_isKey) 
+			Background::m_map[m_mapx][m_mapy] = KEY_ID;
+		else
+			Background::m_map[m_mapx][m_mapy] = 0;
 	}
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };
 	bool getIsKey() { return m_isKey; };
 	void setIsKey(bool key) { m_isKey = key; };
+	bool getIsDestroy() { return m_isDestroy; };
 };
 
