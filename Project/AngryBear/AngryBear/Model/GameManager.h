@@ -3,7 +3,7 @@
 
 #include "Player.h"
 #include "Stone.h"
-#include "Background.h"
+#include "GameMap.h"
 #include "Gate.h"
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
@@ -16,7 +16,7 @@ class GameManager
 {
 private:
 	Player player;
-	Background bacground;
+	GameMap gameMap;
 	vector<Stone> stoneEnemy;
 	vector<UnableMovingRock> unRock;
 	vector<AbleMovingRock> Rock;
@@ -32,7 +32,7 @@ public:
 		//get date from the level
 		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player,gate, timebar, m_level);
 
-		bacground.Init(TEXTURE_BG);
+		gameMap.Init(TEXTURE_BG);
 		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor()-1)); //set image depend on color of player
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor()-1)); //set image depend on color of stone
@@ -47,13 +47,13 @@ public:
 	void Update(float dt, int num)
 	{
 		int flat = 1;
-		bacground.Update(dt, num);
+		gameMap.Update(dt, num);
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			int x = stoneEnemy[i].getM_mapx();
 			int y = stoneEnemy[i].getM_mapy();
 			printf("%d %d\t %d %d\n", x, y, player.getPosx(), player.getPosy());
-			if ((x + 1 < MAX_MAP_COL && Background::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && Background::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
-				(y + 1 < MAX_MAP_ROW && Background::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && Background::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
+			if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
+				(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
 				if (player.getColor() == stoneEnemy[i].getColor())
 				{
 					if (stoneEnemy[i].Update(dt, num)) {
@@ -82,10 +82,10 @@ public:
 			int i_doneu = 0;
 			int i_doned = 0;
 			for (int i = 1; ; i++) {
-				if ((p_y + i) >= 12 || Background::m_map[p_x][p_y + i] == 0) {
+				if ((p_y + i) >= 12 || GameMap::m_map[p_x][p_y + i] == 0) {
 					i_doneu = 1;
 				}
-				if ((p_y - i) < 0 || Background::m_map[p_x][p_y - i] == 0) {
+				if ((p_y - i) < 0 || GameMap::m_map[p_x][p_y - i] == 0) {
 					i_doned = 1;
 				}
 				for (int j = 0; j < stoneEnemy.size(); j++) {
@@ -115,10 +115,10 @@ public:
 			int i_donel = 0;
 			int i_doner = 0;
 			for (int i = 0; ; i++) {
-				if ((p_x + i) >= 12 || Background::m_map[p_x+i][p_y] == 0) {
+				if ((p_x + i) >= 12 || GameMap::m_map[p_x+i][p_y] == 0) {
 					i_donel = 1;
 				}
-				if ((p_x - i) < 0 || Background::m_map[p_x-i][p_y] == 0) {
+				if ((p_x - i) < 0 || GameMap::m_map[p_x-i][p_y] == 0) {
 					i_doner = 1;
 				}
 				for (int j = 0; j < stoneEnemy.size(); j++) {
@@ -146,7 +146,7 @@ public:
 	}
 	void Render(sf::RenderWindow &window)
 	{
-		bacground.Render(window);
+		gameMap.Render(window);
 		player.Render(window);
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			stoneEnemy[i].Render(window);

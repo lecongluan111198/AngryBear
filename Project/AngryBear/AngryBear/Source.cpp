@@ -7,6 +7,7 @@
 #include "Model/ResourceManager.h"
 #include "SFML/Graphics.hpp"
 #include "Define/Define.h"
+#include "Model\GameState\StateMachine.h"
 using namespace sf;
 using namespace std;
 
@@ -22,13 +23,15 @@ int main(int argc, char** argv)
 	// ============================ Init ============================
 
 
-	//test
-	ResourceManager::getInstance()->Init();
-	ResourceManager::getInstance()->loadData();
-	//
+	////test
+	//ResourceManager::getInstance()->Init();
+	//ResourceManager::getInstance()->loadData();
+	////
 
 
-	GameManager::getInstance()->Init();
+	//GameManager::getInstance()->Init();
+
+	StateMachine::getInstance()->Init();
 
 	Clock clock;
 	Time elapsed;
@@ -66,11 +69,13 @@ int main(int argc, char** argv)
 		clock.restart();
 
 		// ================================ Update ================================ 
-		GameManager::getInstance()->Update(dt,num);
+		//GameManager::getInstance()->Update(dt,num);
+		StateMachine::getInstance()->Update(dt, num);
 		num = 0;
 		// ================================ Draw ================================ 
 		window.clear();
-		GameManager::getInstance()->Render(window);
+		//GameManager::getInstance()->Render(window);
+		StateMachine::getInstance()->Render(window);
 
 		window.display();
 	}

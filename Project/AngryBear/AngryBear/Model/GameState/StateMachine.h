@@ -4,8 +4,11 @@
 
 #include "SFML/Graphics.hpp"
 #include "State.h"
+#include "LoadingState.h"
+#include "GamePlayState.h"
 #include "../ResourceManager.h"
 
+using namespace std;
 
 class StateMachine {
 private:
@@ -14,12 +17,27 @@ private:
 	bool m_isRemoving;
 	bool m_isAdding;
 	bool m_isReplacing;
+	static StateMachine* s_Instance;
+	StateMachine() {
 
+	}
+public:
+	static::StateMachine* getInstance();
 	void AddState(State* newState, bool isReplacing = true);
 	void RemoveState();
 	void SwitchState();
 	State* &GetActiveState();
+	void Init();
+	void Update(float dt, int key);
+	void Render(sf::RenderWindow &window);
 }; 
+StateMachine* StateMachine::s_Instance = NULL;
+
+StateMachine* StateMachine::getInstance() {
+	if (s_Instance == NULL)
+		s_Instance = new StateMachine();
+	return s_Instance;
+}
 
 void StateMachine::AddState(State* newState, bool isReplacing) {
 	this->m_isAdding = true;
@@ -60,4 +78,35 @@ void StateMachine::SwitchState() {
 
 State* &StateMachine::GetActiveState() {
 	return this->m_states.top();
+}
+
+void StateMachine::Init() {
+	LoadingState* test1 = new LoadingState();
+	
+	test1->InitWidget();
+	test1->Init();
+	m_states.push(test1);
+	//GamePlayState* test2 = new GamePlayState();
+	//test2->Init();
+	//m_states.push(test2);
+}
+
+void StateMachine::Update(float dt, int key) {
+	stack<State*> s = m_states;
+	State* state;
+	while (!s.empty()) {
+		state = s.top();
+		s.pop();
+		state->Update(dt, key);
+	}
+}
+
+void StateMachine::Render(sf::RenderWindow &window) {
+	stack<State*> s = m_states;
+	State* state;
+	while (!s.empty()) {
+		state = s.top();
+		s.pop();
+		state->Render(window);
+	}
 }

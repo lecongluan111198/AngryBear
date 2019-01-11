@@ -13,7 +13,7 @@
 #include "AbleMovingRock.h"
 #include "Stone.h"
 #include "Player.h"
-#include "Background.h"
+#include "GameMap.h"
 #include "Gate.h"
 #include "TimeBar.h"
 #include "SFML/Graphics.hpp"
@@ -73,6 +73,8 @@ ResourceManager* ResourceManager::getInstance() {
 
 void ResourceManager::Init() {
 	m_dataFolderPath = ROOTFOLDER;
+	//get size of map
+	GameMap::resizeMap();
 }
 
 void ResourceManager::loadData() {
@@ -87,10 +89,6 @@ void ResourceManager::loadData() {
 	char tempPath[BUFFERSIZE] = "";
 	char K[3] = "K1";
 	
-	//get size of map
-
-	Background::resizeMap();
-
 	//get level
 	int quantity = GetPrivateProfileInt("LEVEL", "Quantity", 0, Path);
 	for (int i = 0; i < quantity; i++) {
@@ -219,7 +217,7 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	player.setColor(color);
 	player.setM_mapx((posx - MAP_BORDER_X_MIN-P_SIZE+2) / (P_SIZE-2));
 	player.setM_mapy((posy - MAP_BORDER_Y_MIN) / P_SIZE);
-	Background::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = PLAYER_ID; //update to 2D-array map 
+	GameMap::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = PLAYER_ID; //update to 2D-array map 
 
 	//get stone
 	quantity = GetPrivateProfileInt("STONE", "Quantity", 0, Path);
@@ -241,7 +239,7 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 		tempStone.setColor(color);
 		tempStone.setM_mapx((posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2));
 		tempStone.setM_mapy((posy - MAP_BORDER_Y_MIN) / P_SIZE);
-		Background::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = color; //update to 2D-array map  color; //color == STONE_ID
+		GameMap::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = color; //update to 2D-array map  color; //color == STONE_ID
 
 		stone.push_back(tempStone);
 	}
@@ -259,7 +257,7 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 		tempUnRock.setPosy(posy);
 		tempUnRock.setM_mapx((posx - MAP_BORDER_X_MIN) / CHARACTER_W);
 		tempUnRock.setM_mapy((posy - MAP_BORDER_Y_MIN) / CHARACTER_H);
-		Background::m_map[(posx - MAP_BORDER_X_MIN) / CHARACTER_W][(posy - MAP_BORDER_Y_MIN) / CHARACTER_H] = UNABLEMOVINGROCK_ID;
+		GameMap::m_map[(posx - MAP_BORDER_X_MIN) / CHARACTER_W][(posy - MAP_BORDER_Y_MIN) / CHARACTER_H] = UNABLEMOVINGROCK_ID;
 
 		unRock.push_back(tempUnRock);
 	}
@@ -277,7 +275,7 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 		tempRock.setPosy(posy);
 		tempRock.setM_mapx(posx / CHARACTER_W);
 		tempRock.setM_mapy(posy / CHARACTER_H);
-		Background::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = ABLEMOVINGROCK_ID;
+		GameMap::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = ABLEMOVINGROCK_ID;
 
 		Rock.push_back(tempRock);
 	}

@@ -4,21 +4,23 @@
 #include <vector>
 #include "SFML/Graphics.hpp"
 using namespace std;
-class Background : public GameObject {
+class GameMap : public GameObject {
 protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
-	int posX = 0, posY = 0;
-	int sizeX = 0, sizeY = 0;
+	int posx = 0, posy = 0;
+	
+	
 public:
+	static vector<vector<int>> m_map;
 
 	void Init(const char* textureName)
 	{
 		texture.loadFromFile(textureName);
 		sprite.setTexture(texture);
-		sprite.setPosition(posX, posX);
+		sprite.setPosition(posx, posy);
 
-		sf::Vector2f targetSize(sizeX, sizeY);
+		sf::Vector2f targetSize(400.0f, 700.0f);
 
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,
@@ -31,17 +33,20 @@ public:
 	{
 		window.draw(sprite);
 	}
-
-	void setSize(int sizeX, int sizeY) {
-		this->sizeX = sizeX;
-		this->sizeY = sizeY;
+	static void resizeMap() {
+		m_map.clear();
+		m_map.resize(10, vector<int>());
+		for (int i = 0; i < 10; i++) {
+			m_map[i].resize(12, 0);
+		}
+	 }
+	static void setPos(int x, int y, int type) {
+		m_map[x][y] = type;
 	}
-	void setPos(int posX, int posY) {
-		this->posX = posX;
-		this->posY = posY;
-	}
+	
 
 };
 
+vector<vector<int>> GameMap::m_map = vector<vector<int>>();
 
 

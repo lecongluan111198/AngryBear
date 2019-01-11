@@ -4,7 +4,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
-#include "Background.h"
+#include "GameMap.h"
 using namespace sf;
 class Player : public GameObjectRender {
 private:
@@ -42,10 +42,10 @@ public:
 		case Keyboard::Left:
 			if (posx - P_SIZE >= MAP_BORDER_X_MIN) {
 				posx -= P_SIZE -2;
-				Background::m_map[m_mapx][m_mapy] = 0;
+				GameMap::m_map[m_mapx][m_mapy] = 0;
 				m_mapx--;
-				if (m_mapy - 1 >= 0&&Background::m_map[m_mapx][m_mapy-1] == m_color) {
-					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] == m_color)
+				if (m_mapy - 1 >= 0&&GameMap::m_map[m_mapx][m_mapy-1] == m_color) {
+					if (m_mapy + 1 < 12 && GameMap::m_map[m_mapx][m_mapy + 1] == m_color)
 						//destroy the hang doc
 						m_onDestroy = 1;
 				}
@@ -55,10 +55,10 @@ public:
 			
 			if (posx + P_SIZE*2 <= MAP_BORDER_X_MAX) {
 				posx += P_SIZE -2;
-				Background::m_map[m_mapx][m_mapy] = 0;
+				GameMap::m_map[m_mapx][m_mapy] = 0;
 				m_mapx++;
-				if (m_mapy - 1 >= 0 && Background::m_map[m_mapx][m_mapy - 1] == m_color) {
-					if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] == m_color)
+				if (m_mapy - 1 >= 0 && GameMap::m_map[m_mapx][m_mapy - 1] == m_color) {
+					if (m_mapy + 1 < 12 && GameMap::m_map[m_mapx][m_mapy + 1] == m_color)
 						//destroy the hang doc
 						m_onDestroy = 1;
 				}
@@ -67,10 +67,10 @@ public:
 		case Keyboard::Up:
 			if (posy - P_SIZE >= MAP_BORDER_Y_MIN) {
 				posy -= P_SIZE;
-				Background::m_map[m_mapx][m_mapy] = 0;
+				GameMap::m_map[m_mapx][m_mapy] = 0;
 				m_mapy--;
-				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx-1][m_mapy] == m_color) {
- 					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] == m_color)
+				if (m_mapx - 1 >= 0 && GameMap::m_map[m_mapx-1][m_mapy] == m_color) {
+ 					if (m_mapx + 1 < 10 && GameMap::m_map[m_mapx + 1][m_mapy] == m_color)
 						//destroy the hang ngang
 						m_onDestroy = 2;
 				}
@@ -79,10 +79,10 @@ public:
 		case Keyboard::Down:
 			if (posy + P_SIZE*2 <= MAP_BORDER_Y_MAX) {
 				posy += P_SIZE;
-				Background::m_map[m_mapx][m_mapy] = 0;
+				GameMap::m_map[m_mapx][m_mapy] = 0;
 				m_mapy++;
-				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] != 0 && Background::m_map[m_mapx - 1][m_mapy] < 4) {
-					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] != 0 && Background::m_map[m_mapx + 1][m_mapy] < 4)
+				if (m_mapx - 1 >= 0 && GameMap::m_map[m_mapx - 1][m_mapy] != 0 && GameMap::m_map[m_mapx - 1][m_mapy] < 4) {
+					if (m_mapx + 1 < 10 && GameMap::m_map[m_mapx + 1][m_mapy] != 0 && GameMap::m_map[m_mapx + 1][m_mapy] < 4)
 						m_onDestroy = 2;
 				}
 			}
@@ -90,12 +90,12 @@ public:
 		default:
 			break;
 		}
-		if (Background::m_map[m_mapx][m_mapy] == KEY_ID)
+		if (GameMap::m_map[m_mapx][m_mapy] == KEY_ID)
 		{
 			m_isGetKey = true;
 		}
 		else {
-			Background::m_map[m_mapx][m_mapy] = PLAYER_ID;
+			GameMap::m_map[m_mapx][m_mapy] = PLAYER_ID;
 		}
 		sprite.setPosition(posx, posy);
 		return true;
