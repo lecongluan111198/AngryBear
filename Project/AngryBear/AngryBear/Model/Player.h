@@ -83,7 +83,7 @@ public:
 				m_mapy++;
 				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] == m_color) {
 					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] == m_color)
-						//destroy the hang ngang
+						//destroy theo hang ngang
 						m_onDestroy = 2;
 				}
 			}
@@ -105,6 +105,16 @@ public:
 		
 		texture.loadFromFile(Texture);
 		sprite.setTexture(texture);
+		if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] == m_color) {
+			if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] == m_color)
+				//destroy the hang ngang
+				m_onDestroy = 2;
+		}
+		if (m_mapy - 1 >= 0 && Background::m_map[m_mapx][m_mapy - 1] == m_color) {
+			if (m_mapy + 1 < 12 && Background::m_map[m_mapx][m_mapy + 1] == m_color)
+				//destroy the hang doc
+				m_onDestroy = 1;
+		}
 	};
 	void changeColor() {
 		m_color++;
