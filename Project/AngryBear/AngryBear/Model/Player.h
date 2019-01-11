@@ -81,8 +81,9 @@ public:
 				posy += P_SIZE;
 				Background::m_map[m_mapx][m_mapy] = 0;
 				m_mapy++;
-				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] != 0 && Background::m_map[m_mapx - 1][m_mapy] < 4) {
-					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] != 0 && Background::m_map[m_mapx + 1][m_mapy] < 4)
+				if (m_mapx - 1 >= 0 && Background::m_map[m_mapx - 1][m_mapy] == m_color) {
+					if (m_mapx + 1 < 10 && Background::m_map[m_mapx + 1][m_mapy] == m_color)
+						//destroy the hang ngang
 						m_onDestroy = 2;
 				}
 			}
