@@ -14,7 +14,7 @@ public:
 	void HandleInit(int key);
 	void Update(float dt, int key);
 	void Render(sf::RenderWindow &window);
-	
+	bool isComplete();
 };
 
 void GamePlayState::Init() {
@@ -28,4 +28,8 @@ void GamePlayState::Update(float dt, int key) {
 }
 void GamePlayState::Render(sf::RenderWindow &window) {
 	GameManager::getInstance()->Render(window);
+}
+
+bool GamePlayState::isComplete() {
+	return false;
 }
