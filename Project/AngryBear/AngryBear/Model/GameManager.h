@@ -125,6 +125,11 @@ public:
 					int x = stoneEnemy[j].getM_mapx();
 					int y = stoneEnemy[j].getM_mapy();
 					if (((p_x + i) < 12 && x == p_x +i && y == p_y) || (p_x - i) >= 0 && x == p_x -i && y == p_y) {
+						if (stoneEnemy[j].getIsKey()) {
+							key.setPosx((x + 1) * 35 + 45);
+							key.setPosy(y * 37 + 150);
+							key.Init(ResourceManager::getInstance()->getKeyImage(0));
+						}
 						stoneEnemy[j].destroy();
 						stoneEnemy.erase(stoneEnemy.begin() + j);
 						j--;
