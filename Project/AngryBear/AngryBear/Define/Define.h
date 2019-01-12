@@ -12,8 +12,8 @@
 
 #define TEXTURE_BG		"resources/400x700.png"
 
-#define BACKGROUND_W 400 //width tuong duong voi so hang
-#define BACKGROUND_H 700 //height tuong duong voi so cot
+#define BACKGROUND_W 400 //width tuong duong voi so cot
+#define BACKGROUND_H 700 //height tuong duong voi so hnang
 
 #define CHARACTER_W 50
 #define CHARACTER_H 50

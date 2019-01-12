@@ -22,16 +22,22 @@
     <ClInclude Include="Define\Define.h" />
     <ClInclude Include="Model\AbleMovingRock.h" />
     <ClInclude Include="Model\Background.h" />
+    <ClInclude Include="Model\GameMap.h" />
     <ClInclude Include="Model\Enemy.h" />
     <ClInclude Include="Model\GameManager.h" />
     <ClInclude Include="Model\GameObject.h" />
     <ClInclude Include="Model\GameObjectRender.h" />
+    <ClInclude Include="Model\GameState\GamePlayState.h" />
+    <ClInclude Include="Model\GameState\LoadingState.h" />
     <ClInclude Include="Model\GameState\State.h" />
     <ClInclude Include="Model\GameState\StateMachine.h" />
+    <ClInclude Include="Model\Gate.h" />
+    <ClInclude Include="Model\Key.h" />
     <ClInclude Include="Model\Player.h" />
     <ClInclude Include="Model\ResourceManager.h" />
     <ClInclude Include="Model\Stone.h" />
     <ClInclude Include="Model\Rock.h" />
+    <ClInclude Include="Model\TimeBar.h" />
     <ClInclude Include="Model\UnableMovingRock.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="State\GameOverState.h" />
@@ -51,7 +57,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{94C370BA-1429-498D-9F8A-03CF0AFF17E2}</ProjectGuid>
     <RootNamespace>AngryBear</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
