@@ -1,0 +1,66 @@
+﻿  Source.cpp
+c:\bear\angrybear\project\angrybear\angrybear\model\gameobjectrender.h(18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\gamemap.h(21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\player.h(20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\player.h(92): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\stone.h(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\stone.h(76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\gate.h(11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\timebar.h(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(87): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(88): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(100): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(101): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(111): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(112): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(122): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(123): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(132): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(133): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(142): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(143): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(152): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(153): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(163): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(164): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(174): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(175): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(185): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(186): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(196): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(197): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(207): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\bear\angrybear\project\angrybear\angrybear\model\resourcemanager.h(208): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\bear\angrybear\project\angrybear\angrybear\model\key.h(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\widget.h(23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\bear\angrybear\project\angrybear\angrybear\model\widget.h(25): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+c:\bear\angrybear\project\angrybear\angrybear\model\widget.h(49): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'

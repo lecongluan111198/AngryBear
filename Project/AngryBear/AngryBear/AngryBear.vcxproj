@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Define\Define.h" />
     <ClInclude Include="Model\AbleMovingRock.h" />
+    <ClInclude Include="Model\Explode.h" />
     <ClInclude Include="Model\GameState\MainMenuState.h" />
     <ClInclude Include="Model\Widget.h" />
     <ClInclude Include="Model\GameMap.h" />

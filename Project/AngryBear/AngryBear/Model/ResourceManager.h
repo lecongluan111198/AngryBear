@@ -33,6 +33,7 @@ private:
 	map<int, char[100]> m_Key;
 	map<int, char[100]> m_Gate;
 	map<int, char[100]> m_TimeBar;
+	map<int, char[100]> m_Explode;
 	static ResourceManager* s_instance;
 
 public:
@@ -61,6 +62,7 @@ public:
 	char* getGateImage(int ID);
 	char* getKeyImage(int ID);
 	char* getTimeBarImage(int ID);
+	char* getExplodeImage(int ID);
 };
 
 ResourceManager* ResourceManager::s_Instance = NULL;
@@ -108,9 +110,6 @@ void ResourceManager::loadData() {
 			m_PlayerImage[i] = new char[100];
 			strcpy(m_PlayerImage[i], tempPath);
 			strcpy(tempPath, "");
-		/*	Texture t;
-			t.loadFromFile(tempPath);
-			m_PlayerImage[i] = t;*/
 		}
 	}
 	//get stone
@@ -122,9 +121,6 @@ void ResourceManager::loadData() {
 			m_StoneImage[i] = new char[100];
 			strcpy(m_StoneImage[i], tempPath);
 			strcpy(tempPath, "");
-			/*Texture t;
-			t.loadFromFile(tempPath);
-			m_StoneImage[i] = t;*/
 		}
 	}
 	//get unablemovingrock
@@ -191,6 +187,16 @@ void ResourceManager::loadData() {
 		}
 	}
 
+	//get Explode
+	quantity = GetPrivateProfileInt("EXPLODE", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
+		K[1] = i + 1 + 48;
+		GetPrivateProfileStringA("EXPLODE", K, "", tempPath, BUFFERSIZE, Path);
+		if (strcmp(tempPath, "") != 0) {
+			strcpy(m_Explode[i], tempPath);
+			strcpy(tempPath, "");
+		}
+	}
 }
 
 void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, Gate &gate,TimeBar &timebar, int levelID ) {
@@ -366,6 +372,14 @@ char* ResourceManager::getTimeBarImage(int ID) {
 	if (m_TimeBar.find(ID) != m_TimeBar.end())
 	{
 		return m_TimeBar[ID];
+	}
+	return NULL;
+}
+
+char* ResourceManager::getExplodeImage(int ID) {
+	if (m_Explode.find(ID) != m_Explode.end())
+	{
+		return m_Explode[ID];
 	}
 	return NULL;
 }

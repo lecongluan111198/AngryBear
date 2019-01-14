@@ -49,27 +49,26 @@ public:
 		int flat = 1;
 		gameMap.Update(dt, num);
 		for (int i = 0; i < stoneEnemy.size(); i++) {
-			int x = stoneEnemy[i].getM_mapx();
-			int y = stoneEnemy[i].getM_mapy();
-			printf("%d %d\t %d %d\n", x, y, player.getPosx(), player.getPosy());
-			if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
-				(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
-				if (player.getColor() == stoneEnemy[i].getColor())
-				{
-					if (stoneEnemy[i].Update(dt, num)) {
-						player.Update(dt, num);
-
+			if (stoneEnemy[i].getIsDeleted() == false)
+			{
+				int x = stoneEnemy[i].getM_mapx();
+				int y = stoneEnemy[i].getM_mapy();
+				printf("%d %d\t %d %d\n", x, y, player.getPosx(), player.getPosy());
+				if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
+					(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
+					if (player.getColor() == stoneEnemy[i].getColor())
+					{
+						if (stoneEnemy[i].Update(dt, num)) {
+							player.Update(dt, num);
+						}
 					}
+					flat = 0;
 				}
-				flat = 0;
 			}
 
 		}
 		if (flat == 1)
 			player.Update(dt, num);
-
-
-
 
 		//Check collision
 		int p_x = player.getM_mapx();
@@ -89,19 +88,20 @@ public:
 					i_doned = 1;
 				}
 				for (int j = 0; j < stoneEnemy.size(); j++) {
+					if (stoneEnemy[j].getIsDeleted() == false)
+					{
+						int x = stoneEnemy[j].getM_mapx();
+						int y = stoneEnemy[j].getM_mapy();
+						if (((p_y + i) < 12 && x == p_x && y == p_y + i) || (p_y - i) >= 0 && x == p_x && y == p_y - i) {
+							if (stoneEnemy[j].getIsKey()) {
+								key.setPosx((x + 1) * 35 + 45);
+								key.setPosy(y * 37 + 150);
+								key.Init(ResourceManager::getInstance()->getKeyImage(0));
+							}
 
-					int x = stoneEnemy[j].getM_mapx();
-					int y = stoneEnemy[j].getM_mapy();
-					if (((p_y + i) < 12 && x == p_x && y == p_y + i) || (p_y - i) >= 0 && x == p_x && y == p_y - i) {
-						if (stoneEnemy[j].getIsKey()) {
-							key.setPosx((x+1)*35+45);
-							key.setPosy(y*37+150);
-							key.Init(ResourceManager::getInstance()->getKeyImage(0));
+							stoneEnemy[j].destroy();
+							stoneEnemy[j].setIsDeleted(true);
 						}
-						
-						stoneEnemy[j].destroy();
-						stoneEnemy.erase(stoneEnemy.begin() + j);
-						j--;
 					}
 				}
 				if (i_doneu == 1 && i_doned ==1)
@@ -122,17 +122,20 @@ public:
 					i_doner = 1;
 				}
 				for (int j = 0; j < stoneEnemy.size(); j++) {
-					int x = stoneEnemy[j].getM_mapx();
-					int y = stoneEnemy[j].getM_mapy();
-					if (((p_x + i) < 12 && x == p_x +i && y == p_y) || (p_x - i) >= 0 && x == p_x -i && y == p_y) {
-						if (stoneEnemy[j].getIsKey()) {
-							key.setPosx((x + 1) * 35 + 45);
-							key.setPosy(y * 37 + 150);
-							key.Init(ResourceManager::getInstance()->getKeyImage(0));
+					if (stoneEnemy[j].getIsDeleted() == false)
+					{
+						int x = stoneEnemy[j].getM_mapx();
+						int y = stoneEnemy[j].getM_mapy();
+						if (((p_x + i) < 12 && x == p_x + i && y == p_y) || (p_x - i) >= 0 && x == p_x - i && y == p_y) {
+							if (stoneEnemy[j].getIsKey()) {
+								key.setPosx((x + 1) * 35 + 45);
+								key.setPosy(y * 37 + 150);
+								key.Init(ResourceManager::getInstance()->getKeyImage(0));
+							}
+							stoneEnemy[j].destroy();
+							stoneEnemy.erase(stoneEnemy.begin() + j);
+							j--;
 						}
-						stoneEnemy[j].destroy();
-						stoneEnemy.erase(stoneEnemy.begin() + j);
-						j--;
 					}
 				}
 				if (i_donel == 1 && i_doner == 1)
@@ -154,7 +157,10 @@ public:
 		gameMap.Render(window);
 		player.Render(window);
 		for (int i = 0; i < stoneEnemy.size(); i++) {
-			stoneEnemy[i].Render(window);
+			if (stoneEnemy[i].getIsDeleted() == false)
+			{
+				stoneEnemy[i].Render(window);
+			}
 		}
 		if(player.getSetKey())
 			gate.Render(window);
