@@ -4,14 +4,15 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
-class Explode : public GameObjectRender {
+class Explode : public GameObjectRender{
 private:
-	int posx = 0, posy = 0;
 	const char* text;
+	int i =0, j=0;
+	bool expired;
 public:
 	void Init(const char* textureName) override
 	{
-		/*texture.loadFromFile(textureName, sf::IntRect(128*posx, 128*posy, 128, 128));
+		texture.loadFromFile(textureName, sf::IntRect(128*j,128*i , 128, 128));
 		sprite.setTexture(texture);
 		text = textureName;
 		sprite.setPosition(posx, posy);
@@ -19,14 +20,21 @@ public:
 		sf::Vector2f targetSize(37, 37);
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,
-			targetSize.y / sprite.getLocalBounds().height);*/
+			targetSize.y / sprite.getLocalBounds().height);
 	};
 	bool Update(float frameTime, int num) override {
-		/*posx++;
-		if (posx == 4) {
-			posy++;
-			posx = 0;
+		j ++;
+		if (j == 4) {
+			i++;
+			j = 0;
 		}
-		Init(text);*/
+		if (i == 4) {
+			expired = true;
+		}
+		Init(text);
+		return false;
+	}
+	bool isExpired() {
+		return expired;
 	}
 };

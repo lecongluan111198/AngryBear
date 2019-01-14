@@ -5,6 +5,7 @@
 #include "Stone.h"
 #include "GameMap.h"
 #include "Gate.h"
+#include "Explode.h"
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
 #include "ResourceManager.h"
@@ -20,8 +21,10 @@ private:
 	vector<Stone> stoneEnemy;
 	vector<UnableMovingRock> unRock;
 	vector<AbleMovingRock> Rock;
+	vector< Explode> explode;
 	Gate gate;
 	Key key;
+	Explode ex;
 	TimeBar timebar;
 	int m_level = 0;
 	static GameManager* s_Instance;
@@ -44,6 +47,7 @@ public:
 		Todo here
 		*/
 	}
+	int count = 0;
 	void Update(float dt, int num)
 	{
 		int flat = 1;
@@ -74,6 +78,7 @@ public:
 		int p_x = player.getM_mapx();
 		int p_y = player.getM_mapy();
 		int done = 0;
+		
 		switch (player.getDestroy()) {
 			//destroy hang doc
 		case 1:
@@ -98,6 +103,11 @@ public:
 								key.setPosy(y * 37 + 150);
 								key.Init(ResourceManager::getInstance()->getKeyImage(0));
 							}
+							ex.setPosx((x + 1) * 35 + 45);
+							ex.setPosy(y * 37 + 150);
+							ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+
+							explode.push_back(ex);
 
 							stoneEnemy[j].destroy();
 							stoneEnemy[j].setIsDeleted(true);
@@ -132,9 +142,15 @@ public:
 								key.setPosy(y * 37 + 150);
 								key.Init(ResourceManager::getInstance()->getKeyImage(0));
 							}
+							
+							ex.setPosx((x + 1) * 35 + 45);
+							ex.setPosy(y * 37 + 150);
+							ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+							
+
+							explode.push_back(ex);
 							stoneEnemy[j].destroy();
-							stoneEnemy.erase(stoneEnemy.begin() + j);
-							j--;
+							stoneEnemy[j].setIsDeleted(true);
 						}
 					}
 				}
@@ -148,19 +164,36 @@ public:
 			break;
 		}
 
-
+		for (int i = 0; i < explode.size(); i++) {
+			if (!explode[i].isExpired())
+			{
+				explode[i].Update(dt,0);
+			}
+		}
 		timebar.Update(dt,0);
 		
 	}
 	void Render(sf::RenderWindow &window)
 	{
+		bool flag = false;
 		gameMap.Render(window);
 		player.Render(window);
+		int j = 0;
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			if (stoneEnemy[i].getIsDeleted() == false)
 			{
 				stoneEnemy[i].Render(window);
 			}
+		}
+		for (int i = 0; i < explode.size(); i++) {
+			if (!explode[i].isExpired())
+			{
+				explode[i].Render(window);
+				flag = true;
+			}
+		}
+		if (!flag) {
+			explode.clear();
 		}
 		if(player.getSetKey())
 			gate.Render(window);
@@ -171,6 +204,7 @@ public:
 	void UpdateClickEvent(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSprite().getGlobalBounds();
 
+		
 		if (bounds.contains(mouse))
 		{
 			player.changeColor();
