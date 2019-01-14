@@ -23,14 +23,6 @@ int main(int argc, char** argv)
 	// ============================ Init ============================
 
 
-	////test
-	//ResourceManager::getInstance()->Init();
-	//ResourceManager::getInstance()->loadData();
-	////
-
-
-	//GameManager::getInstance()->Init();
-
 	StateMachine::getInstance()->Init();
 
 	Clock clock;
@@ -58,7 +50,6 @@ int main(int argc, char** argv)
 			{
 				// transform the mouse position from window coordinates to world coordinates
 				mouse = window.mapPixelToCoords(Mouse::getPosition(window));
-				//GameManager::getInstance()->UpdateColor(dt, mouse);
 				StateMachine::getInstance()->UpdateClickEvent(dt, mouse);
 			}
 		}

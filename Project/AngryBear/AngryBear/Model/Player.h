@@ -115,7 +115,7 @@ public:
 	}
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };
-	Sprite getSpite() {
+	Sprite getSprite() {
 		return sprite;
 	}
 

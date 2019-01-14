@@ -12,8 +12,8 @@
 
 #define TEXTURE_BG				"resources/400x700.png"
 #define TEXTURE_LOGO			"resources/logo.png"
-#define TEXTURE_BACKGROUND_MENU	"resources/bear.png"
-#define TEXTURE_PLAY_BUTTON		"resources/logo.png"
+#define TEXTURE_BACKGROUND_MENU	"resources/bear.jpg"
+#define TEXTURE_PLAY_BUTTON		"resources/Button_47.png"
 
 #define BACKGROUND_W 400 //width tuong duong voi so cot
 #define BACKGROUND_H 700 //height tuong duong voi so hnang

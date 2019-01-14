@@ -5,6 +5,7 @@
 #include "SFML/Graphics.hpp"
 #include "State.h"
 #include "LoadingState.h"
+#include "MainMenuState.h"
 #include "GamePlayState.h"
 #include "../ResourceManager.h"
 
@@ -15,15 +16,19 @@ private:
 	queue<State*> m_states;
 	State* m_newState;
 	static StateMachine* s_Instance;
+	bool isReplace = false;
 	StateMachine(){
 		State* test = new LoadingState();
+		m_states.push(test);
+		test = new MainMenuState();
 		m_states.push(test);
 		test = new GamePlayState();
 		m_states.push(test);
 	}
 public:
-	static::StateMachine* getInstance();
-	void AddState(State* newState);
+	static StateMachine* getInstance();
+
+	void AddState(State* newState, bool isReplace = false);
 	void RemoveState();
 	void SwitchState();
 	State* &GetActiveState();
@@ -41,7 +46,7 @@ StateMachine* StateMachine::getInstance() {
 	return s_Instance;
 }
 
-void StateMachine::AddState(State* newState) {
+void StateMachine::AddState(State* newState, bool isReplace) {
 	m_states.push(move(newState)); //move all resource from newState to this->newState
 }
 
@@ -62,20 +67,25 @@ State* &StateMachine::GetActiveState() {
 }
 
 void StateMachine::Init() {
-	m_states.front()->Init();
+	if(!m_states.empty())
+		m_states.front()->Init();
 }
 
 void StateMachine::Update(float dt, int key) {
-	m_states.front()->Update(dt, key);
+	if (!m_states.empty())
+		m_states.front()->Update(dt, key);
 }
 
 void StateMachine::Render(sf::RenderWindow &window) {
-	m_states.front()->Render(window);
-
-	if (m_states.front()->isComplete())
+	if (!m_states.empty())
 	{
-		RemoveState();
-		SwitchState();
+		m_states.front()->Render(window);
+
+		if (m_states.front()->isComplete())
+		{
+			RemoveState();
+			SwitchState();
+		}
 	}
 }
 

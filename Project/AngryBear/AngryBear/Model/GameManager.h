@@ -169,9 +169,8 @@ public:
 		timebar.Render(window);
 	}
 	void UpdateClickEvent(float dt, Vector2f mouse) {
-		sf::FloatRect bounds = player.getSpite().getGlobalBounds();
+		sf::FloatRect bounds = player.getSprite().getGlobalBounds();
 
-		
 		if (bounds.contains(mouse))
 		{
 			player.changeColor();

@@ -11,15 +11,9 @@ protected:
 	int m_mapx, m_mapy;
 public:
 	
-	void Init(const char* textureName)
-	{
-		texture.loadFromFile(textureName);
-		sprite.setTexture(texture);
-		sprite.setPosition(posx, posy);
-	};
-	
+	virtual void Init(const char* textureName){}
 	virtual bool Update(float frameTime, int num) { return false; };
-	void Render(sf::RenderWindow &window)
+	virtual void Render(sf::RenderWindow &window)
 	{
 		window.draw(sprite);
 	}
@@ -35,8 +29,6 @@ public:
 	void setPosy(int pos_y) {
 		posy = pos_y;
 	}
-
-
 	int getM_mapx() {
 		return m_mapx;
 	}

@@ -10,6 +10,7 @@ protected:
 	int posX = 0, posY = 0;
 	int sizeX = 0, sizeY = 0;
 	char *Image = NULL;
+	State *state;
 public:
 	~Widget() {
 		delete[]Image;
@@ -20,7 +21,7 @@ public:
 		{
 			texture.loadFromFile(Image);
 			sprite.setTexture(texture);
-			sprite.setPosition(posX, posX);
+			sprite.setPosition(posX, posY);
 
 			sf::Vector2f targetSize(sizeX, sizeY);
 
@@ -47,6 +48,16 @@ public:
 	void setImage(const char* image) {
 		this->Image = new char[strlen(image)];
 		strcpy(this->Image, image);
+	}
+	void setState(State* state) {
+		this->state = state;
+
+	}
+	State* getState() {
+		return state;
+	}
+	Sprite getSprite() {
+		return sprite;
 	}
 };
 

@@ -5,6 +5,7 @@
 #include "../ResourceManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
+#include "GamePlayState.h"
 
 using namespace std;
 
@@ -25,9 +26,10 @@ private:
 		m_WidgetQueue.push(widget);
 
 		widget = new Widget();
-		widget->setPos(0, WINDOWS_H / 2);
-		widget->setSize(WINDOWS_W, 30);
+		widget->setPos(150, 350);
+		widget->setSize(100, 100);
 		widget->setImage(TEXTURE_PLAY_BUTTON);
+		widget->setState(new GamePlayState());
 		m_WidgetQueue.push(widget);
 	}
 
@@ -73,11 +75,6 @@ void MainMenuState::Render(sf::RenderWindow &window) {
 		q.pop();
 		widget->Render(window);
 	}
-
-	if (_clock.getElapsedTime().asSeconds() > 1 && m_nLoadFile >= 1)
-	{
-		isCheck = true;
-	}
 }
 
 bool MainMenuState::isComplete() {
@@ -86,5 +83,17 @@ bool MainMenuState::isComplete() {
 }
 
 void MainMenuState::UpdateClickEvent(float dt, Vector2f mouse) {
-	
+	queue<Widget *> q = m_WidgetQueue;
+	Widget* widget;
+	while (!q.empty()) {
+		widget = q.front();
+		q.pop();
+		sf::FloatRect bounds = widget->getSprite().getGlobalBounds();
+
+		if (bounds.contains(mouse))
+		{
+			//StateMachine::getInstance()->AddState(widget->getState(), true);
+			isCheck = true;
+		}
+	}
 }
