@@ -162,7 +162,7 @@ public:
 			key.Render(window);
 		timebar.Render(window);
 	}
-	void UpdateColor(float dt, Vector2f mouse) {
+	void UpdateClickEvent(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSpite().getGlobalBounds();
 
 		

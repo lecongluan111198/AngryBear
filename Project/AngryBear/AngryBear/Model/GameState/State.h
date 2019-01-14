@@ -11,11 +11,13 @@ public:
 	virtual void Update(float dt, int key) = 0;
 	virtual void Render(sf::RenderWindow &window) = 0;
 	virtual bool isComplete() = 0;
+	virtual void UpdateClickEvent(float dt, Vector2f mouse) { }
 	virtual void Pause() {
 
 	}
 	virtual void Resume() {
 
 	}
+
 	
 };

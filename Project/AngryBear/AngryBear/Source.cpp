@@ -36,9 +36,10 @@ int main(int argc, char** argv)
 	Clock clock;
 	Time elapsed;
 	int num = 0;
+	sf::Vector2f mouse;
+	Event event;
 	while (window.isOpen())
 	{
-		Event event;
 		// A microsecond is 1/1,000,000th of a second, 1000 microseconds == 1 millisecond
 		float dt = clock.getElapsedTime().asMicroseconds() * 1.0f / 1000000;
 		while (window.pollEvent(event))
@@ -56,8 +57,9 @@ int main(int argc, char** argv)
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				// transform the mouse position from window coordinates to world coordinates
-				sf::Vector2f mouse = window.mapPixelToCoords(Mouse::getPosition(window));
-				GameManager::getInstance()->UpdateColor(dt, mouse);
+				mouse = window.mapPixelToCoords(Mouse::getPosition(window));
+				//GameManager::getInstance()->UpdateColor(dt, mouse);
+				StateMachine::getInstance()->UpdateClickEvent(dt, mouse);
 			}
 		}
 

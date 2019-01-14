@@ -14,10 +14,6 @@ class StateMachine {
 private:
 	queue<State*> m_states;
 	State* m_newState;
-	/*bool m_isRemoving;
-	bool m_isAdding;
-	bool m_isReplacing;*/
-	sf::RenderWindow window;
 	static StateMachine* s_Instance;
 	StateMachine(){
 		State* test = new LoadingState();
@@ -34,6 +30,7 @@ public:
 	void Init();
 	void Update(float dt, int key);
 	void Render(sf::RenderWindow &window);
+	void UpdateClickEvent(float dt, Vector2f mouse);
 }; 
 
 StateMachine* StateMachine::s_Instance = NULL;
@@ -80,4 +77,8 @@ void StateMachine::Render(sf::RenderWindow &window) {
 		RemoveState();
 		SwitchState();
 	}
+}
+
+void StateMachine::UpdateClickEvent(float dt, Vector2f mouse) {
+	m_states.front()->UpdateClickEvent(dt, mouse);
 }

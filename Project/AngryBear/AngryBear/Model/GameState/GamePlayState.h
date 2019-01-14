@@ -14,6 +14,7 @@ public:
 	void Update(float dt, int key);
 	void Render(sf::RenderWindow &window);
 	bool isComplete();
+	void UpdateClickEvent(float dt, Vector2f mouse);
 };
 
 void GamePlayState::Init() {
@@ -27,6 +28,10 @@ void GamePlayState::Update(float dt, int key) {
 }
 void GamePlayState::Render(sf::RenderWindow &window) {
 	GameManager::getInstance()->Render(window);
+}
+
+void GamePlayState::UpdateClickEvent(float dt, Vector2f mouse) {
+	GameManager::getInstance()->UpdateClickEvent(dt, mouse);
 }
 
 bool GamePlayState::isComplete() {
