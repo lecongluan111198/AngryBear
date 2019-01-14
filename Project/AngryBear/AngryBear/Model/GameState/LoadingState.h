@@ -1,33 +1,45 @@
 #pragma once
 #include<iostream>
 #include <queue>
-#include "../Background.h"
+#include "../Widget.h"
 #include "../ResourceManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
+
 using namespace std;
 
 class LoadingState : public State {
 private:
-	queue<Background*> m_WidgetQueue;
+	queue<Widget*> m_WidgetQueue;
+	sf::Clock _clock;
 	int m_nLoadFile = 0;
+	bool isCheck = false;
 	void InitWidget() {
-		Background *background;
+		Widget *widget;
 
-		background = new Background();
-		background->setPos(0, 0);
-		background->setSize(WINDOWS_W, WINDOWS_H);
+		widget = new Widget();
+		widget->setPos(0, 0);
+		widget->setSize(WINDOWS_W, WINDOWS_H);
+		widget->setImage(TEXTURE_LOGO);
 
-		m_WidgetQueue.push(background);
+		m_WidgetQueue.push(widget);
+		
+		/*widget = new Widget();
+		widget->setPos(0, WINDOWS_H / 2);
+		widget->setSize(WINDOWS_W, 30);
 
-		background = new Background();
-		background->setPos(0, WINDOWS_H / 2);
-		background->setSize(WINDOWS_W, 30);
 
-		m_WidgetQueue.push(background);
+		m_WidgetQueue.push(widget);*/
 	}
 
 public:
+	~LoadingState() {
+		while (!m_WidgetQueue.empty())
+		{
+			delete m_WidgetQueue.front();
+			m_WidgetQueue.pop();
+		}
+	}
 	void Init();
 	void HandleInit(int key);
 	void Update(float dt, int key);
@@ -37,13 +49,14 @@ public:
 };
 
 void LoadingState::Init() {
+	
 	InitWidget();
-	queue<Background *> q = m_WidgetQueue;
-	Background* background;
+	queue<Widget *> q = m_WidgetQueue;
+	Widget* widget;
 	while (!q.empty()) {
-		background = q.front();
+		widget = q.front();
 		q.pop();
-		background->Init(TEXTURE_BG);
+		widget->Init();
 	}
 
 	ResourceManager::getInstance()->Init();
@@ -56,18 +69,21 @@ void LoadingState::Update(float dt, int key) {
 	m_nLoadFile++;
 }
 void LoadingState::Render(sf::RenderWindow &window) {
-	queue<Background *> q = m_WidgetQueue;
-	Background* background;
+	queue<Widget *> q = m_WidgetQueue;
+	Widget* widget;
 	while (!q.empty()) {
-		background = q.front();
+		widget = q.front();
 		q.pop();
-		background->Render(window);
+		widget->Render(window);
 	}
-	sleep(sf::milliseconds(3));
+
+	if (_clock.getElapsedTime().asSeconds() > 1 && m_nLoadFile >= 1)
+	{
+		isCheck = true;
+	}
 }
 
 bool LoadingState::isComplete() {
-	if (m_nLoadFile == 1)
-		return true;
-	return false;
+
+	return isCheck;
 }

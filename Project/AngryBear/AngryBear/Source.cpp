@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 {
 	srand((unsigned int)time(NULL));
 	
-	RenderWindow window(VideoMode(WINDOWS_W, WINDOWS_H), "Spaceship Game!", Style::Default);
+	RenderWindow window(VideoMode(WINDOWS_W, WINDOWS_H), "Angry Bear!", Style::Default);
 	window.setFramerateLimit(FPS_LIMIT);
 
 	// ============================ Init ============================

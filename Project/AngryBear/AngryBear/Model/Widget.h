@@ -1,29 +1,33 @@
 #pragma once
-#include "GameObject.h"
 #include <iostream>
 #include <vector>
 #include "SFML/Graphics.hpp"
 using namespace std;
-class Background : public GameObject {
+class Widget {
 protected:
 	sf::Texture texture;
 	sf::Sprite sprite;
 	int posX = 0, posY = 0;
 	int sizeX = 0, sizeY = 0;
+	char *Image = NULL;
 public:
-
-	void Init(const char* textureName)
+	~Widget() {
+		delete[]Image;
+	}
+	void Init()
 	{
-		texture.loadFromFile(textureName);
-		sprite.setTexture(texture);
-		sprite.setPosition(posX, posX);
+		if (this->Image != NULL)
+		{
+			texture.loadFromFile(Image);
+			sprite.setTexture(texture);
+			sprite.setPosition(posX, posX);
 
-		sf::Vector2f targetSize(sizeX, sizeY);
+			sf::Vector2f targetSize(sizeX, sizeY);
 
-		sprite.setScale(
-			targetSize.x / sprite.getLocalBounds().width,
-			targetSize.y / sprite.getLocalBounds().height);
-
+			sprite.setScale(
+				targetSize.x / sprite.getLocalBounds().width,
+				targetSize.y / sprite.getLocalBounds().height);
+		}
 	};
 
 	bool Update(float frameTime, int num) { return true; };
@@ -40,7 +44,10 @@ public:
 		this->posX = posX;
 		this->posY = posY;
 	}
-
+	void setImage(const char* image) {
+		this->Image = new char[strlen(image)];
+		strcpy(this->Image, image);
+	}
 };
 
 

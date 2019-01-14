@@ -17,13 +17,13 @@ private:
 	/*bool m_isRemoving;
 	bool m_isAdding;
 	bool m_isReplacing;*/
+	sf::RenderWindow window;
 	static StateMachine* s_Instance;
-	StateMachine() {
+	StateMachine(){
 		State* test = new LoadingState();
 		m_states.push(test);
 		test = new GamePlayState();
 		m_states.push(test);
-
 	}
 public:
 	static::StateMachine* getInstance();
@@ -35,6 +35,7 @@ public:
 	void Update(float dt, int key);
 	void Render(sf::RenderWindow &window);
 }; 
+
 StateMachine* StateMachine::s_Instance = NULL;
 
 StateMachine* StateMachine::getInstance() {
@@ -48,8 +49,11 @@ void StateMachine::AddState(State* newState) {
 }
 
 void StateMachine::RemoveState() {
-	if(!m_states.empty())
+	if (!m_states.empty())
+	{
+		delete m_states.front();
 		m_states.pop();
+	}
 }
 
 void StateMachine::SwitchState() {

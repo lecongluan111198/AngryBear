@@ -1,7 +1,6 @@
 #pragma once
 #include<iostream>
 #include <queue>
-#include "../Background.h"
 #include "../GameManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"

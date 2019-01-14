@@ -15,22 +15,16 @@
     <ClInclude Include="Model\Rock.h" />
     <ClInclude Include="Model\UnableMovingRock.h" />
     <ClInclude Include="Model\AbleMovingRock.h" />
-    <ClInclude Include="State\State.h" />
-    <ClInclude Include="State\LoadingState.h" />
-    <ClInclude Include="State\MainMenuState.h" />
-    <ClInclude Include="State\GamePlayState.h" />
-    <ClInclude Include="State\GameOverState.h" />
-    <ClInclude Include="State\StateManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Model\GameState\State.h" />
     <ClInclude Include="Model\GameState\StateMachine.h" />
     <ClInclude Include="Model\GameState\LoadingState.h" />
     <ClInclude Include="Model\GameMap.h" />
-    <ClInclude Include="Model\Background.h" />
     <ClInclude Include="Model\TimeBar.h" />
     <ClInclude Include="Model\Gate.h" />
     <ClInclude Include="Model\Key.h" />
     <ClInclude Include="Model\GameState\GamePlayState.h" />
+    <ClInclude Include="Model\Widget.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AngryBear.rc" />
