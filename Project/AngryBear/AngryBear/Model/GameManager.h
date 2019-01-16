@@ -26,12 +26,12 @@ private:
 	Key key;
 	Explode ex;
 	TimeBar timebar;
-	int m_level = 0;
 	static GameManager* s_Instance;
-
+	int isComplete = UNCOMPLETE;
 public:
-	void Init(const char* textureName = "")
+	void Init(int m_level)
 	{
+		
 		//get date from the level
 		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player,gate, timebar, m_level);
 
@@ -195,8 +195,11 @@ public:
 		if (!flag) {
 			explode.clear();
 		}
-		if(player.getSetKey())
+		if (player.getSetKey())
+		{
+			isComplete = WIN;
 			gate.Render(window);
+		}
 		else
 			key.Render(window);
 		timebar.Render(window);
@@ -212,6 +215,9 @@ public:
 		}
 	}
 
+	int getIsComplete() {
+		return isComplete;
+	}
 	static GameManager* getInstance()
 	{
 		if (s_Instance == nullptr)
@@ -220,6 +226,8 @@ public:
 		}
 		return s_Instance;
 	}
+
+
 };
 
 GameManager* GameManager::s_Instance = nullptr;

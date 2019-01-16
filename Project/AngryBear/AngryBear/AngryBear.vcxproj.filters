@@ -27,6 +27,7 @@
     <ClInclude Include="Model\Widget.h" />
     <ClInclude Include="Model\GameState\MainMenuState.h" />
     <ClInclude Include="Model\Explode.h" />
+    <ClInclude Include="Model\GameState\NextLevelState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AngryBear.rc" />

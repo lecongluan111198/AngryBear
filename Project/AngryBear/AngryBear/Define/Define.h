@@ -11,6 +11,9 @@
 
 
 #define TEXTURE_BG				"resources/400x700.png"
+#define TEXTURE_WIN				"resources/Congratulation.png"
+#define TEXTURE_PLAYAGAIN		"resources/PlayAgain.png"
+#define TEXTURE_NEXTLEVEL		"resources/PlayAgain.png"
 #define TEXTURE_LOGO			"resources/logo.png"
 #define TEXTURE_BACKGROUND_MENU	"resources/bear.jpg"
 #define TEXTURE_PLAY_BUTTON		"resources/Button_47.png"
@@ -51,6 +54,11 @@
 
 #define MAX_MAP_COL 7
 #define MAX_MAP_ROW 12
+
+#define UNCOMPLETE	0
+#define WIN			1
+#define GAMEOVER	2
+
 #pragma endregion
 
 

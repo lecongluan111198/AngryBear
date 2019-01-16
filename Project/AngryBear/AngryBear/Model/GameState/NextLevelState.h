@@ -5,11 +5,14 @@
 #include "../ResourceManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
+#include "StateMachine.h"
 #include "GamePlayState.h"
+
+
 
 using namespace std;
 
-class MainMenuState : public State {
+class NextLevelState : public State {
 private:
 	queue<Widget*> m_WidgetQueue;
 	sf::Clock _clock;
@@ -21,20 +24,32 @@ private:
 		widget = new Widget();
 		widget->setPos(0, 0);
 		widget->setSize(WINDOWS_W, WINDOWS_H);
-		widget->setImage(TEXTURE_BACKGROUND_MENU);
-
+		widget->setImage(TEXTURE_BG);
 		m_WidgetQueue.push(widget);
 
 		widget = new Widget();
-		widget->setPos(150, 350);
-		widget->setSize(100, 100);
-		widget->setImage(TEXTURE_PLAY_BUTTON);
-		widget->setState(new GamePlayState());
+		widget->setPos(100, 200);
+		widget->setSize(200, 200);
+		widget->setImage(TEXTURE_WIN);
+		m_WidgetQueue.push(widget);
+
+		widget = new Widget();
+		widget->setPos(125, 250);
+		widget->setSize(50, 50);
+		widget->setImage(TEXTURE_PLAYAGAIN);
+		//widget->setState(new GamePlayState());
+		m_WidgetQueue.push(widget);
+
+		widget = new Widget();
+		widget->setPos(225, 250);
+		widget->setSize(50, 50);
+		widget->setImage(TEXTURE_NEXTLEVEL);
+		//widget->setState(new GamePlayState(true));
 		m_WidgetQueue.push(widget);
 	}
 
 public:
-	~MainMenuState() {
+	~NextLevelState() {
 		while (!m_WidgetQueue.empty())
 		{
 			delete m_WidgetQueue.front();
@@ -45,11 +60,12 @@ public:
 	void HandleInit(int key);
 	void Update(float dt, int key);
 	void Render(sf::RenderWindow &window);
-	bool isComplete();
 	void UpdateClickEvent(float dt, Vector2f mouse);
+	bool isComplete();
+
 };
 
-void MainMenuState::Init() {
+void NextLevelState::Init() {
 
 	InitWidget();
 	queue<Widget *> q = m_WidgetQueue;
@@ -60,12 +76,12 @@ void MainMenuState::Init() {
 		widget->Init();
 	}
 }
-void MainMenuState::HandleInit(int key) {
+void NextLevelState::HandleInit(int key) {
 
 }
-void MainMenuState::Update(float dt, int key) {
+void NextLevelState::Update(float dt, int key) {
 }
-void MainMenuState::Render(sf::RenderWindow &window) {
+void NextLevelState::Render(sf::RenderWindow &window) {
 	queue<Widget *> q = m_WidgetQueue;
 	Widget* widget;
 	while (!q.empty()) {
@@ -75,12 +91,7 @@ void MainMenuState::Render(sf::RenderWindow &window) {
 	}
 }
 
-bool MainMenuState::isComplete() {
-
-	return isCheck;
-}
-
-void MainMenuState::UpdateClickEvent(float dt, Vector2f mouse) {
+void NextLevelState::UpdateClickEvent(float dt, Vector2f mouse) {
 	queue<Widget *> q = m_WidgetQueue;
 	Widget* widget;
 	while (!q.empty()) {
@@ -95,3 +106,9 @@ void MainMenuState::UpdateClickEvent(float dt, Vector2f mouse) {
 		}
 	}
 }
+
+bool NextLevelState::isComplete() {
+
+	return isCheck;
+}
+

@@ -8,6 +8,7 @@
 #include "SFML/Graphics.hpp"
 #include "Define/Define.h"
 #include "Model\GameState\StateMachine.h"
+#include "Model/GameState/LoadingState.h"
 using namespace sf;
 using namespace std;
 
@@ -22,9 +23,9 @@ int main(int argc, char** argv)
 
 	// ============================ Init ============================
 
-
+	StateMachine::getInstance()->AddState(new LoadingState());
 	StateMachine::getInstance()->Init();
-
+	
 	Clock clock;
 	Time elapsed;
 	int num = 0;

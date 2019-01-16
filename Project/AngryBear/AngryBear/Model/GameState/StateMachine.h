@@ -1,12 +1,13 @@
 #pragma once
 #include <iostream>
 #include <stack>
-
+#include <queue>
 #include "SFML/Graphics.hpp"
 #include "State.h"
-#include "LoadingState.h"
-#include "MainMenuState.h"
-#include "GamePlayState.h"
+
+//#include "LoadingState.h"
+//#include "MainMenuState.h"
+//#include "GamePlayState.h"
 #include "../ResourceManager.h"
 
 using namespace std;
@@ -18,15 +19,10 @@ private:
 	static StateMachine* s_Instance;
 	bool isReplace = false;
 	StateMachine(){
-		State* test = new LoadingState();
-		m_states.push(test);
-		test = new MainMenuState();
-		m_states.push(test);
-		test = new GamePlayState();
-		m_states.push(test);
 	}
 public:
 	static StateMachine* getInstance();
+
 
 	void AddState(State* newState, bool isReplace = false);
 	void RemoveState();
@@ -48,6 +44,16 @@ StateMachine* StateMachine::getInstance() {
 
 void StateMachine::AddState(State* newState, bool isReplace) {
 	m_states.push(move(newState)); //move all resource from newState to this->newState
+	if (isReplace)
+	{
+		State *temp = m_states.front();
+		//RemoveState();
+		m_states.pop();
+		m_states.push(temp);
+		SwitchState();
+	}
+
+	
 }
 
 void StateMachine::RemoveState() {
@@ -67,8 +73,10 @@ State* &StateMachine::GetActiveState() {
 }
 
 void StateMachine::Init() {
-	if(!m_states.empty())
+	if (!m_states.empty())
+	{
 		m_states.front()->Init();
+	}
 }
 
 void StateMachine::Update(float dt, int key) {

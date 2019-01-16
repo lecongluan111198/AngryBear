@@ -6,6 +6,7 @@
 #include "../ResourceManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
+#include "StateMachine.h"
 
 
 
@@ -82,7 +83,9 @@ void LoadingState::Render(sf::RenderWindow &window) {
 
 	if (_clock.getElapsedTime().asSeconds() > 1 && m_nLoadFile >= 1)
 	{
-		//StateMachine::getInstance()->AddState(new MainMenuState(), true);
+		//StateMachine *a = StateMachine::getInstance();
+		StateMachine::getInstance()->AddState(new MainMenuState());
+
 		isCheck = true;
 	}
 }

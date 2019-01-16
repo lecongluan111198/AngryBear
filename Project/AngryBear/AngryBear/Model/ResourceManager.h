@@ -76,7 +76,7 @@ ResourceManager* ResourceManager::getInstance() {
 void ResourceManager::Init() {
 	m_dataFolderPath = ROOTFOLDER;
 	//get size of map
-	GameMap::resizeMap();
+	
 }
 
 void ResourceManager::loadData() {
@@ -213,6 +213,8 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	char K[3] = "K1";
 	int posx, posy;
 	int color;
+
+	GameMap::resizeMap();//reset game map 
 
 	//get player
 	posx = GetPrivateProfileInt("PLAYER", "PosX", 0, Path);
