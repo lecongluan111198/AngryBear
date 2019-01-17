@@ -56,7 +56,16 @@ public:
 		default:
 			break;
 		}
-		GameMap::m_map[m_mapx][m_mapy] = ABLEMOVINGROCK_ID;
+		if (GameMap::m_map[m_mapx][m_mapy] == BOOM_ID)
+		{
+			destroy();
+			isDeleted = true;
+		}
+		else {
+			GameMap::m_map[m_mapx][m_mapy] = ABLEMOVINGROCK_ID;
+		}
+
+		
 		sprite.setPosition(posx, posy);
 
 		return flat;

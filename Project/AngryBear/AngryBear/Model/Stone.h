@@ -26,7 +26,7 @@ public:
 		bool flat = false;
 		switch (num) {
 		case Keyboard::Left:
-			if (posx - P_SIZE >= MAP_BORDER_X_MIN && GameMap::m_map[m_mapx - 1][m_mapy] == 0) {
+			if (posx - P_SIZE >= MAP_BORDER_X_MIN && (GameMap::m_map[m_mapx - 1][m_mapy] == 13||GameMap::m_map[m_mapx - 1][m_mapy] == 0)) {
 				GameMap::m_map[m_mapx][m_mapy] = 0;
 				posx -= P_SIZE - 2;
 				m_mapx--;
@@ -35,7 +35,7 @@ public:
 			break;
 		case Keyboard::Right:
 
-			if (posx + P_SIZE*2 <= MAP_BORDER_X_MAX && GameMap::m_map[m_mapx + 1][m_mapy] == 0) {
+			if (posx + P_SIZE*2 <= MAP_BORDER_X_MAX && (GameMap::m_map[m_mapx + 1][m_mapy] == 13||GameMap::m_map[m_mapx + 1][m_mapy] == 0)) {
 				GameMap::m_map[m_mapx][m_mapy] = 0;
 				posx += P_SIZE - 2;
 				m_mapx++;
@@ -43,7 +43,7 @@ public:
 			}
 			break;
 		case Keyboard::Up:
-			if (posy - P_SIZE >= MAP_BORDER_Y_MIN && GameMap::m_map[m_mapx][m_mapy - 1] == 0) {
+			if (posy - P_SIZE >= MAP_BORDER_Y_MIN && (GameMap::m_map[m_mapx][m_mapy - 1] == 13||GameMap::m_map[m_mapx][m_mapy - 1] == 0)) {
 				GameMap::m_map[m_mapx][m_mapy] = 0;
 				posy -= P_SIZE;
 				m_mapy--;
@@ -51,7 +51,7 @@ public:
 			}
 			break;
 		case Keyboard::Down:
-			if (posy + P_SIZE*2 <= MAP_BORDER_Y_MAX && GameMap::m_map[m_mapx][m_mapy + 1] == 0) {
+			if (posy + P_SIZE*2 <= MAP_BORDER_Y_MAX && (GameMap::m_map[m_mapx][m_mapy + 1] == 13||GameMap::m_map[m_mapx][m_mapy + 1] == 0)) {
 				GameMap::m_map[m_mapx][m_mapy] = 0;
 				posy += P_SIZE;
 				m_mapy++;
@@ -61,7 +61,16 @@ public:
 		default:
 			break;
 		}
-		GameMap::m_map[m_mapx][m_mapy] = m_color;
+		if (GameMap::m_map[m_mapx][m_mapy] == BOOM_ID)
+		{
+			m_isKey = false;
+			destroy();
+			isDeleted = true;
+		}
+		else {
+			GameMap::m_map[m_mapx][m_mapy] = m_color;
+		}
+	
 		sprite.setPosition(posx, posy);
 
 		return flat;

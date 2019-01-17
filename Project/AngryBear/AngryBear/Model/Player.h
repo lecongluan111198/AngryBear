@@ -13,6 +13,7 @@ private:
 	//1: destroy hàng dọc, 2: destroy hàng ngang, 0: clear
 	int m_onDestroy = 0;
 	bool m_isGetKey = false;
+	bool m_isDead = false;
 public:
 	void Init(const char* textureName) override
 	{
@@ -86,13 +87,19 @@ public:
 		default:
 			break;
 		}
-		if (GameMap::m_map[m_mapx][m_mapy] == KEY_ID)
+		if (GameMap::m_map[m_mapx][m_mapy] == BOOM_ID)
+		{
+			m_isDead = true;
+		}
+		
+		else if (GameMap::m_map[m_mapx][m_mapy] == KEY_ID)
 		{
 			m_isGetKey = true;
 		}
 		else {
 			GameMap::m_map[m_mapx][m_mapy] = PLAYER_ID;
 		}
+		
 		sprite.setPosition(posx, posy);
 		return true;
 	};
@@ -131,6 +138,9 @@ public:
 	}
 	bool getSetKey() {
 		return m_isGetKey;
+	}
+	bool getIsDead() {
+		return m_isDead;
 	}
 
 };

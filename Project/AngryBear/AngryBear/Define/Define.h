@@ -51,6 +51,7 @@
 #define YELLOWSTONE_ID 4
 #define UNABLEMOVINGROCK_ID 5
 #define ABLEMOVINGROCK_ID 6
+#define BOOM_ID 13
 
 #define MAX_MAP_COL 7
 #define MAX_MAP_ROW 12

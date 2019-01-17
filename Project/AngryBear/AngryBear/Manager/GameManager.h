@@ -11,6 +11,7 @@
 #include "../Model/UnableMovingRock.h"
 #include "../Model/AbleMovingRock.h"
 #include "../Model/TimeBar.h"
+#include "../Model/Boom.h"
 #include "SFML/Graphics.hpp"
 #include "ResourceManager.h"
 
@@ -28,6 +29,7 @@ private:
 	vector<UnableMovingRock> unRock;
 	vector<AbleMovingRock> Rock;
 	vector< Explode> explode;
+	vector<Boom> boom;
 	Gate gate;
 	Key key;
 	Explode ex;
@@ -52,7 +54,7 @@ public:
 		//Timer = 0;
 
 		//get date from the level
-		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, gate, timebar, m_level);
+		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, gate, timebar, boom, m_level);
 
 		gameMap.Init(TEXTURE_BG);
 		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor()-1)); //set image depend on color of player
@@ -64,6 +66,9 @@ public:
 		}
 		for (int i = 0; i < Rock.size(); i++) {
 			Rock[i].Init(ResourceManager::getInstance()->getRockImage(0));
+		}
+		for (int i = 0; i < boom.size(); i++) {
+			boom[i].Init(ResourceManager::getInstance()->getBoomImage(0));
 		}
 		gate.Init(ResourceManager::getInstance()->getGateImage(0));
 		timebar.Init(ResourceManager::getInstance()->getTimeBarImage(0));
@@ -89,7 +94,20 @@ public:
 					if (player.getColor() == stoneEnemy[i].getColor())
 					{
 						if (stoneEnemy[i].Update(dt, num)) {
-							player.Update(dt, num);
+							if (stoneEnemy[i].getIsDeleted()) {
+								
+								for (int j = 0; j < boom.size(); j++) {
+									if (boom[j].getPosx() == stoneEnemy[i].getPosx() && boom[j].getPosy() == stoneEnemy[i].getPosy())
+									{
+										boom[j].setIsExplode(true);
+										ex.setPosx(boom[j].getPosx());
+										ex.setPosy(boom[j].getPosy());
+										ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+										explode.push_back(ex);
+									}
+								}
+							}
+								player.Update(dt, num);
 						}
 					}
 					flat = 0;
@@ -121,6 +139,19 @@ public:
 				if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
 					(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
 					if (Rock[i].Update(dt, num)) {
+						if (Rock[i].getIsDeleted()) {
+							
+							for (int j = 0; j < boom.size(); j++) {
+								if (boom[j].getPosx() == Rock[i].getPosx() && Rock[j].getPosy() == Rock[i].getPosy())
+								{
+									boom[j].setIsExplode(true);
+									ex.setPosx(boom[j].getPosx());
+									ex.setPosy(boom[j].getPosy());
+									ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+									explode.push_back(ex);
+								}
+							}
+						}
 						player.Update(dt, num);
 					}
 					flat = 0;
@@ -130,7 +161,18 @@ public:
 
 		if (flat == 1)
 			player.Update(dt, num);
-
+		if (player.getIsDead()) {
+			for (int i = 0; i < boom.size(); i++) {
+				if (boom[i].getPosx() == player.getPosx() && boom[i].getPosy() == player.getPosy())
+				{
+					boom[i].setIsExplode(true);
+					ex.setPosx(boom[i].getPosx());
+					ex.setPosy(boom[i].getPosy());
+					ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+					explode.push_back(ex);
+				}
+			}
+		}
 		//Check collision
 		int p_x = player.getM_mapx();
 		int p_y = player.getM_mapy();
@@ -247,8 +289,22 @@ public:
 	{
 		bool flag = false;
 		gameMap.Render(window);
-		player.Render(window);
+		if(player.getIsDead() == false)
+			player.Render(window);
 		int j = 0;
+		for (int i = 0; i < explode.size(); i++) {
+			if (!explode[i].isExpired())
+			{
+				explode[i].Render(window);
+				flag = true;
+			}
+		}
+		for (int i = 0; i < boom.size(); i++) {
+			if (boom[i].getIsExplode()==false)
+			{
+				boom[i].Render(window);
+			}
+		}
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			if (stoneEnemy[i].getIsDeleted() == false)
 			{
@@ -269,13 +325,7 @@ public:
 			}
 		}
 
-		for (int i = 0; i < explode.size(); i++) {
-			if (!explode[i].isExpired())
-			{
-				explode[i].Render(window);
-				flag = true;
-			}
-		}
+		
 		if (!flag) {
 			explode.clear();
 		}

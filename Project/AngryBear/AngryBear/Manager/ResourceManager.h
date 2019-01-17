@@ -17,6 +17,7 @@
 #include "../Model/UnableMovingRock.h"
 #include "../Model/AbleMovingRock.h"
 #include "../Model/TimeBar.h"
+#include "../Model/Boom.h"
 
 #include "SFML/Graphics.hpp"
 using namespace std;
@@ -36,6 +37,7 @@ private:
 	map<int, char[100]> m_Gate;
 	map<int, char[100]> m_TimeBar;
 	map<int, char[100]> m_Explode;
+	map<int, char[100]> m_boom;
 	static ResourceManager* s_instance;
 
 public:
@@ -53,7 +55,7 @@ public:
 	static ResourceManager* getInstance();
 	void Init();
 	void loadData();
-	void loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player,Gate &gate,TimeBar &timebar,int levelID = 1);
+	void loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player,Gate &gate,TimeBar &timebar, vector<Boom> &boom, int levelID = 1);
 	char* getPlayerImage(int ID);
 	char* getStoneImage(int ID);
 	char* getUnRockImage(int ID);
@@ -65,7 +67,7 @@ public:
 	char* getKeyImage(int ID);
 	char* getTimeBarImage(int ID);
 	char* getExplodeImage(int ID);
-
+	char* getBoomImage(int ID);
 	int getMaxLevel();
 };
 
@@ -201,9 +203,20 @@ void ResourceManager::loadData() {
 			strcpy(tempPath, "");
 		}
 	}
+
+	//get boom
+	quantity = GetPrivateProfileInt("BOOM", "Quantity", 0, Path);
+	for (int i = 0; i < quantity; i++) {
+		K[1] = i + 1 + 48;
+		GetPrivateProfileStringA("BOOM", K, "", tempPath, BUFFERSIZE, Path);
+		if (strcmp(tempPath, "") != 0) {
+			strcpy(m_boom[i], tempPath);
+			strcpy(tempPath, "");
+		}
+	}
 }
 
-void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, Gate &gate,TimeBar &timebar, int levelID ) {
+void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &unRock, vector<AbleMovingRock> &Rock, Player &player, Gate &gate,TimeBar &timebar,vector<Boom> &boom, int levelID ) {
 	LPSTR Path = NULL;
 	Path = new CHAR[255];
 	GetCurrentDirectory(255, Path);
@@ -311,7 +324,25 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	timebar.setPosx(posx);
 	timebar.setPosy(posy);
 
+	//Boom
+	quantity = GetPrivateProfileInt("BOOM", "Quantity", 0, Path);
+	Boom boom1;
+	for (int i = 0; i < quantity; i++) {
+		POSXK[4] = i + 1 + 48;
+		POSYK[4] = i + 1 + 48;
+		posx = GetPrivateProfileInt("BOOM", POSXK, 0, Path);
+		posy = GetPrivateProfileInt("BOOM", POSYK, 0, Path);
 
+		boom1.setPosx(posx);
+		boom1.setPosy(posy);
+		int x = (posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2);
+		int y = (posy - MAP_BORDER_Y_MIN) / P_SIZE;
+		boom1.setM_mapx(x);
+		boom1.setM_mapy(y);
+		GameMap::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = BOOM_ID;
+
+		boom.push_back(boom1);
+	}
 }
 
 char* ResourceManager::getPlayerImage(int ID) {
@@ -391,7 +422,13 @@ char* ResourceManager::getExplodeImage(int ID) {
 	}
 	return NULL;
 }
-
+char* ResourceManager::getBoomImage(int ID) {
+	if (m_boom.find(ID) != m_boom.end())
+	{
+		return m_boom[ID];
+	}
+	return NULL;
+}
 int ResourceManager::getMaxLevel() {
 	return m_Level.size();
 }
