@@ -20,6 +20,8 @@ using namespace std;
 class GameManager
 {
 private:
+	//sf::Clock clock;
+	int Timer;
 	Player player;
 	GameMap gameMap;
 	vector<Stone> stoneEnemy;
@@ -45,6 +47,10 @@ public:
 		isComplete = UNCOMPLETE;
 		isKey = false;
 
+		//set start time
+		//clock.restart();
+		//Timer = 0;
+
 		//get date from the level
 		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, gate, timebar, m_level);
 
@@ -64,6 +70,12 @@ public:
 	}
 	void Update(float dt, int num)
 	{
+		if (num == Keyboard::Space)
+		{
+			player.changeColor();
+			player.UpdateColor(dt, ResourceManager::getInstance()->getPlayerImage(player.getColor() - 1));
+		}
+
 		int flat = 1;
 		gameMap.Update(dt, num);
 		for (int i = 0; i < stoneEnemy.size(); i++) {
@@ -212,6 +224,10 @@ public:
 			}
 		}
 		timebar.Update(dt,0);
+		/*while (clock.getElapsedTime().asSeconds() < 8)
+		{
+			timebar.Update(dt, 0, Timer++);
+		}*/
 		
 	}
 	void Render(sf::RenderWindow &window)
@@ -254,6 +270,10 @@ public:
 			key.Render(window);
 		}
 		timebar.Render(window);
+		/*if (clock.getElapsedTime().asSeconds() > MAX_TIME)
+		{
+			isComplete = GAMEOVER;
+		}*/
 	}
 	void UpdateClickEvent(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSprite().getGlobalBounds();
@@ -262,7 +282,7 @@ public:
 		if (bounds.contains(mouse))
 		{
 			player.changeColor();
-			player.UpdateColor(dt, ResourceManager::getInstance()->getPlayerImage(player.getColor()-1));
+			player.UpdateColor(dt, ResourceManager::getInstance()->getPlayerImage(player.getColor() - 1));
 		}
 	}
 	

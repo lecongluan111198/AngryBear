@@ -40,13 +40,15 @@ int main(int argc, char** argv)
 			if (event.type == Event::Closed)
 				window.close();
 			if (Keyboard::isKeyPressed(Keyboard::Left))
-				num = 71;
-			if (Keyboard::isKeyPressed(Keyboard::Right))
-				num = 72;
-			if (Keyboard::isKeyPressed(Keyboard::Up))
-				num = 73;
-			if (Keyboard::isKeyPressed(Keyboard::Down))
-				num = 74;
+				num = Keyboard::Left;
+			else if (Keyboard::isKeyPressed(Keyboard::Right))
+				num = Keyboard::Right;
+			else if (Keyboard::isKeyPressed(Keyboard::Up))
+				num = Keyboard::Up;
+			else if (Keyboard::isKeyPressed(Keyboard::Down))
+				num = Keyboard::Down;
+			else if(Keyboard::isKeyPressed(Keyboard::Space))
+				num = Keyboard::Space;
 			if (Mouse::isButtonPressed(Mouse::Left))
 			{
 				// transform the mouse position from window coordinates to world coordinates
@@ -57,7 +59,7 @@ int main(int argc, char** argv)
 
 		elapsed = clock.getElapsedTime();
 	
-		
+		cout << dt << endl;
 		//std::cout << "dt: " << dt << std::endl;
 		// Start the countdown over.  Think of laps on a stop watch.
 		clock.restart();

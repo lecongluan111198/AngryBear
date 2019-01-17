@@ -45,7 +45,10 @@ bool GamePlayState::isComplete() {
 	if (GameManager::getInstance()->getIsComplete() == WIN)
 	{
 		StateMachine::getInstance()->AddState(new NextLevelState(), true);
-		//return true;
+	}
+	else if (GameManager::getInstance()->getIsComplete() == GAMEOVER)
+	{
+		StateMachine::getInstance()->AddState(new NextLevelState(), true);
 	}
 	return false;
 }

@@ -5,7 +5,7 @@
 #define WINDOWS_W	400
 #define WINDOWS_H	700
 #define FPS_LIMIT	3030
-
+#define MAX_TIME	120
 #define PLAYER_SPEED	350
 #define ROOTFOLDER		"FileResource.ini"
 

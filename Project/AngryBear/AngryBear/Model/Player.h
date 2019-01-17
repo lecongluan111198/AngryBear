@@ -4,6 +4,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "../Define/Define.h"
+//#include "../Manager/ResourceManager.h"
 #include "GameMap.h"
 using namespace sf;
 class Player : public GameObjectRender {
