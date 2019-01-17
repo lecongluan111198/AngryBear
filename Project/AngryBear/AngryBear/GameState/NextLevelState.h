@@ -29,12 +29,12 @@ private:
 		Title->setImage(TEXTURE_WIN);
 
 		RetryButton = new Widget();
-		RetryButton->setPos(125, 250);
+		RetryButton->setPos(125, 300);
 		RetryButton->setSize(50, 50);
 		RetryButton->setImage(TEXTURE_PLAYAGAIN);
 
 		NextButton = new Widget();
-		NextButton->setPos(225, 250);
+		NextButton->setPos(225, 300);
 		NextButton->setSize(50, 50);
 		NextButton->setImage(TEXTURE_NEXTLEVEL);
 	}

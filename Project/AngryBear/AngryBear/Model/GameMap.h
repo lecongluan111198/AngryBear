@@ -35,9 +35,9 @@ public:
 	}
 	static void resizeMap() {
 		m_map.clear();
-		m_map.resize(10, vector<int>());
-		for (int i = 0; i < 10; i++) {
-			m_map[i].resize(12, 0);
+		m_map.resize(MAX_MAP_COL + 1, vector<int>());
+		for (int i = 0; i < MAX_MAP_COL + 1; i++) {
+			m_map[i].resize(MAX_MAP_ROW + 1, 0);
 		}
 	 }
 	static void setPos(int x, int y, int type) {

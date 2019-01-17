@@ -53,6 +53,12 @@ public:
 		for (int i = 0; i < stoneEnemy.size(); i++) {
 			stoneEnemy[i].Init(ResourceManager::getInstance()->getStoneImage(stoneEnemy[i].getColor()-1)); //set image depend on color of stone
 		}
+		for (int i = 0; i < unRock.size(); i++) {
+			unRock[i].Init(ResourceManager::getInstance()->getUnRockImage(0));
+		}
+		for (int i = 0; i < Rock.size(); i++) {
+			Rock[i].Init(ResourceManager::getInstance()->getRockImage(0));
+		}
 		gate.Init(ResourceManager::getInstance()->getGateImage(0));
 		timebar.Init(ResourceManager::getInstance()->getTimeBarImage(0));
 	}
@@ -65,7 +71,7 @@ public:
 			{
 				int x = stoneEnemy[i].getM_mapx();
 				int y = stoneEnemy[i].getM_mapy();
-				printf("%d %d\t %d %d\n", x, y, player.getPosx(), player.getPosy());
+				printf("%d %d\t %d %d\n", player.getM_mapx(), player.getM_mapy(), player.getPosx(), player.getPosy());
 				if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
 					(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
 					if (player.getColor() == stoneEnemy[i].getColor())
@@ -195,6 +201,13 @@ public:
 				stoneEnemy[i].Render(window);
 			}
 		}
+		for (int i = 0; i < unRock.size(); i++) {
+			unRock[i].Render(window);
+		}
+		for (int i = 0; i < Rock.size(); i++) {
+			Rock[i].Render(window);
+		}
+
 		for (int i = 0; i < explode.size(); i++) {
 			if (!explode[i].isExpired())
 			{
