@@ -267,9 +267,9 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	
 		tempUnRock.setPosx(posx);
 		tempUnRock.setPosy(posy);
-		tempUnRock.setM_mapx((posx - MAP_BORDER_X_MIN) / CHARACTER_W);
-		tempUnRock.setM_mapy((posy - MAP_BORDER_Y_MIN) / CHARACTER_H);
-		GameMap::m_map[(posx - MAP_BORDER_X_MIN) / CHARACTER_W][(posy - MAP_BORDER_Y_MIN) / CHARACTER_H] = UNABLEMOVINGROCK_ID;
+		tempUnRock.setM_mapx((posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2));
+		tempUnRock.setM_mapy((posy - MAP_BORDER_Y_MIN) / P_SIZE);
+		GameMap::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = UNABLEMOVINGROCK_ID;
 
 		unRock.push_back(tempUnRock);
 	}
@@ -285,9 +285,11 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 
 		tempRock.setPosx(posx);
 		tempRock.setPosy(posy);
-		tempRock.setM_mapx(posx / CHARACTER_W);
-		tempRock.setM_mapy(posy / CHARACTER_H);
-		GameMap::m_map[posx / CHARACTER_W][posy / CHARACTER_H] = ABLEMOVINGROCK_ID;
+		int x = (posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2);
+		int y = (posy - MAP_BORDER_Y_MIN) / P_SIZE;
+		tempRock.setM_mapx(x);
+		tempRock.setM_mapy(y);
+		GameMap::m_map[(posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2)][(posy - MAP_BORDER_Y_MIN) / P_SIZE] = ABLEMOVINGROCK_ID;
 
 		Rock.push_back(tempRock);
 	}

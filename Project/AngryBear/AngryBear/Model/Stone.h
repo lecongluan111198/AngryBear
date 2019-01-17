@@ -28,7 +28,7 @@ public:
 		case Keyboard::Left:
 			if (posx - P_SIZE >= MAP_BORDER_X_MIN && GameMap::m_map[m_mapx - 1][m_mapy] == 0) {
 				GameMap::m_map[m_mapx][m_mapy] = 0;
-				posx -= P_SIZE-2;
+				posx -= P_SIZE - 2;
 				m_mapx--;
 				flat = true;
 			}
@@ -37,7 +37,7 @@ public:
 
 			if (posx + P_SIZE*2 <= MAP_BORDER_X_MAX && GameMap::m_map[m_mapx + 1][m_mapy] == 0) {
 				GameMap::m_map[m_mapx][m_mapy] = 0;
-				posx += P_SIZE -2;
+				posx += P_SIZE - 2;
 				m_mapx++;
 				flat = true;
 			}

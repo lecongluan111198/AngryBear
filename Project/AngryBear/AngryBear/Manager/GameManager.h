@@ -71,7 +71,7 @@ public:
 			{
 				int x = stoneEnemy[i].getM_mapx();
 				int y = stoneEnemy[i].getM_mapy();
-				printf("%d %d\t %d %d\n", player.getM_mapx(), player.getM_mapy(), player.getPosx(), player.getPosy());
+				
 				if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
 					(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
 					if (player.getColor() == stoneEnemy[i].getColor())
@@ -85,6 +85,31 @@ public:
 			}
 
 		}
+
+		for (int i = 0; i < unRock.size(); i++) {
+			int x = unRock[i].getM_mapx();
+			int y = unRock[i].getM_mapy();
+			
+			if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
+				(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
+				
+				flat = 0;
+			}
+		}
+
+		for (int i = 0; i < Rock.size(); i++) {
+			int x = Rock[i].getM_mapx();
+			int y = Rock[i].getM_mapy();
+			
+			if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
+				(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
+				if (Rock[i].Update(dt, num)) {
+					player.Update(dt, num);
+				}
+				flat = 0;
+			}
+		}
+
 		if (flat == 1)
 			player.Update(dt, num);
 
@@ -204,6 +229,7 @@ public:
 		for (int i = 0; i < unRock.size(); i++) {
 			unRock[i].Render(window);
 		}
+
 		for (int i = 0; i < Rock.size(); i++) {
 			Rock[i].Render(window);
 		}

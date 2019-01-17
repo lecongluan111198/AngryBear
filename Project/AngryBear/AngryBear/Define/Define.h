@@ -13,7 +13,7 @@
 #define TEXTURE_BG				"resources/400x700.png"
 #define TEXTURE_WIN				"resources/Congratulation.png"
 #define TEXTURE_PLAYAGAIN		"resources/PlayAgain.png"
-#define TEXTURE_NEXTLEVEL		"resources/PlayAgain.png"
+#define TEXTURE_NEXTLEVEL		"resources/Button_48.png"
 #define TEXTURE_LOGO			"resources/logo.png"
 #define TEXTURE_BACKGROUND_MENU	"resources/bear.jpg"
 #define TEXTURE_PLAY_BUTTON		"resources/Button_47.png"
