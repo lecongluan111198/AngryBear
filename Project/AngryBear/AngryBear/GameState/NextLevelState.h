@@ -82,7 +82,6 @@ void NextLevelState::UpdateClickEvent(float dt, Vector2f mouse) {
 	sf::FloatRect RetryBtnBounds = RetryButton->getSprite().getGlobalBounds();
 	if (RetryBtnBounds.contains(mouse))
 	{
-		//GamePlayState::levelID++;
 		isCheck = true;
 	}
 		

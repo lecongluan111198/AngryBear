@@ -75,7 +75,7 @@ public:
 	int getColor() { return m_color; };
 	void setColor(int color) { m_color = color; };
 	bool getIsKey() { return m_isKey; };
-	void setIsKey(bool key) { m_isKey = key; };
-	bool getIsDestroy() { return m_isDestroy; };
+	void setIsKey(bool key) { m_isKey = key; };/*
+	bool getIsDestroy() { return m_isDestroy; };*/
 };
 

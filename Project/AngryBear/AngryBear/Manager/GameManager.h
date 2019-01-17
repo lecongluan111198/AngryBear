@@ -34,7 +34,7 @@ private:
 	TimeBar timebar;
 	static GameManager* s_Instance;
 	int isComplete = UNCOMPLETE;
-	bool isKey;
+	bool showingKey;
 	int m_level = 0;
 public:
 	
@@ -45,7 +45,7 @@ public:
 		Rock.clear();
 		explode.clear();
 		isComplete = UNCOMPLETE;
-		isKey = false;
+		showingKey= false;
 
 		//set start time
 		//clock.restart();
@@ -99,26 +99,32 @@ public:
 		}
 
 		for (int i = 0; i < unRock.size(); i++) {
-			int x = unRock[i].getM_mapx();
-			int y = unRock[i].getM_mapy();
-			
-			if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
-				(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
-				
-				flat = 0;
+			if (unRock[i].getIsDeleted() == false)
+			{
+				int x = unRock[i].getM_mapx();
+				int y = unRock[i].getM_mapy();
+
+				if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
+					(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
+
+					flat = 0;
+				}
 			}
 		}
 
 		for (int i = 0; i < Rock.size(); i++) {
-			int x = Rock[i].getM_mapx();
-			int y = Rock[i].getM_mapy();
-			
-			if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
-				(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
-				if (Rock[i].Update(dt, num)) {
-					player.Update(dt, num);
+			if (Rock[i].getIsDeleted() == false)
+			{
+				int x = Rock[i].getM_mapx();
+				int y = Rock[i].getM_mapy();
+
+				if ((x + 1 < MAX_MAP_COL && GameMap::m_map[x + 1][y] == PLAYER_ID && num == Keyboard::Left) || (x - 1 >= 0 && GameMap::m_map[x - 1][y] == PLAYER_ID && num == Keyboard::Right) ||
+					(y + 1 < MAX_MAP_ROW && GameMap::m_map[x][y + 1] == PLAYER_ID && num == Keyboard::Up) || (y - 1 >= 0 && GameMap::m_map[x][y - 1] == PLAYER_ID && num == Keyboard::Down)) {
+					if (Rock[i].Update(dt, num)) {
+						player.Update(dt, num);
+					}
+					flat = 0;
 				}
-				flat = 0;
 			}
 		}
 
@@ -131,8 +137,7 @@ public:
 		int done = 0;
 		
 		switch (player.getDestroy()) {
-			//destroy hang doc
-		case 1:
+		case 1: //destroy hang doc
 		{
 			int i_doneu = 0;
 			int i_doned = 0;
@@ -153,16 +158,18 @@ public:
 								key.setPosx((x + 1) * 35 + 45);
 								key.setPosy(y * 37 + 150);
 								key.Init(ResourceManager::getInstance()->getKeyImage(0));
-								isKey = true;
+								showingKey= true;
 							}
+							
+							//destroy enemy
+							stoneEnemy[j].destroy();
+							stoneEnemy[j].setIsDeleted(true);
+
+							//initializing animation killing enemy 
 							ex.setPosx((x + 1) * 35 + 45);
 							ex.setPosy(y * 37 + 150);
 							ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
-
 							explode.push_back(ex);
-
-							stoneEnemy[j].destroy();
-							stoneEnemy[j].setIsDeleted(true);
 						}
 					}
 				}
@@ -172,7 +179,7 @@ public:
 			player.setDestroy(0);
 		}
 			break;
-		case 2:
+		case 2: //destroy hang ngang
 		{
 			int i_donel = 0;
 			int i_doner = 0;
@@ -193,17 +200,18 @@ public:
 								key.setPosx((x + 1) * 35 + 45);
 								key.setPosy(y * 37 + 150);
 								key.Init(ResourceManager::getInstance()->getKeyImage(0));
-								isKey = true;
+								showingKey= true;
 							}
-							
+							//destroy enemy
+							stoneEnemy[j].destroy();
+							stoneEnemy[j].setIsDeleted(true);
+
+							//initializing animation killing enemy 
 							ex.setPosx((x + 1) * 35 + 45);
 							ex.setPosy(y * 37 + 150);
 							ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
-							
-
 							explode.push_back(ex);
-							stoneEnemy[j].destroy();
-							stoneEnemy[j].setIsDeleted(true);
+
 						}
 					}
 				}
@@ -220,15 +228,20 @@ public:
 		for (int i = 0; i < explode.size(); i++) {
 			if (!explode[i].isExpired())
 			{
-				explode[i].Update(dt,0);
+				explode[i].Update(dt, 0);
 			}
 		}
+
 		timebar.Update(dt,0);
-		/*while (clock.getElapsedTime().asSeconds() < 8)
+		if (dt - timebar.getStartTime() > MAX_TIME)
 		{
-			timebar.Update(dt, 0, Timer++);
-		}*/
-		
+			isComplete = GAMEOVER;
+		}
+		if (player.getSetKey())
+		{
+			explodeAll();
+			//isComplete = WIN;
+		}
 	}
 	void Render(sf::RenderWindow &window)
 	{
@@ -243,11 +256,17 @@ public:
 			}
 		}
 		for (int i = 0; i < unRock.size(); i++) {
-			unRock[i].Render(window);
+			if (unRock[i].getIsDeleted() == false)
+			{
+				unRock[i].Render(window);
+			}
 		}
 
 		for (int i = 0; i < Rock.size(); i++) {
-			Rock[i].Render(window);
+			if (Rock[i].getIsDeleted() == false)
+			{
+				Rock[i].Render(window);
+			}
 		}
 
 		for (int i = 0; i < explode.size(); i++) {
@@ -260,20 +279,17 @@ public:
 		if (!flag) {
 			explode.clear();
 		}
-		if (player.getSetKey())
+		if (player.getSetKey() && !flag)
 		{
 			isComplete = WIN;
 			gate.Render(window);
 		}
-		else if(isKey)
+		else if(showingKey)
 		{
 			key.Render(window);
 		}
 		timebar.Render(window);
-		/*if (clock.getElapsedTime().asSeconds() > MAX_TIME)
-		{
-			isComplete = GAMEOVER;
-		}*/
+		
 	}
 	void UpdateClickEvent(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSprite().getGlobalBounds();
@@ -309,6 +325,59 @@ public:
 			m_level++;
 		else
 			m_level = 0;
+	}
+
+	void explodeAll() {
+		int x;
+		int y;
+		for (int i = 0; i < stoneEnemy.size(); i++) {
+			if (stoneEnemy[i].getIsDeleted() == false)
+			{
+				x = stoneEnemy[i].getM_mapx();
+				y = stoneEnemy[i].getM_mapy();
+
+				stoneEnemy[i].destroy();
+				stoneEnemy[i].setIsDeleted(true);
+
+				ex.setPosx((x + 1) * P_SIZE - 2 + MAP_BORDER_X_MIN);
+				ex.setPosy(y * P_SIZE + MAP_BORDER_Y_MIN);
+				ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+				explode.push_back(ex);
+			}
+
+		}
+
+		for (int i = 0; i < unRock.size(); i++) {
+			if (unRock[i].getIsDeleted() == false)
+			{
+				x = unRock[i].getM_mapx();
+				y = unRock[i].getM_mapy();
+
+				unRock[i].destroy();
+				unRock[i].setIsDeleted(true);
+
+				ex.setPosx((x + 1) * P_SIZE - 2 + MAP_BORDER_X_MIN);
+				ex.setPosy(y * P_SIZE + MAP_BORDER_Y_MIN);
+				ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+				explode.push_back(ex);
+			}
+		}
+
+		for (int i = 0; i < Rock.size(); i++) {
+			if (Rock[i].getIsDeleted() == false)
+			{
+				x = Rock[i].getM_mapx();
+				y = Rock[i].getM_mapy();
+
+				Rock[i].destroy();
+				Rock[i].setIsDeleted(true);
+
+				ex.setPosx((x + 1) * P_SIZE - 2 + MAP_BORDER_X_MIN);
+				ex.setPosy(y * P_SIZE + MAP_BORDER_Y_MIN);
+				ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+				explode.push_back(ex);
+			}
+		}
 	}
 };
 

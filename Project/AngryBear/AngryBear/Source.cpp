@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 	while (window.isOpen())
 	{
 		// A microsecond is 1/1,000,000th of a second, 1000 microseconds == 1 millisecond
-		float dt = clock.getElapsedTime().asMicroseconds() * 1.0f / 1000000;
+		float dt = clock.getElapsedTime().asSeconds();
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed)
@@ -59,18 +59,15 @@ int main(int argc, char** argv)
 
 		elapsed = clock.getElapsedTime();
 	
-		cout << dt << endl;
-		//std::cout << "dt: " << dt << std::endl;
+		//cout << dt << endl;
 		// Start the countdown over.  Think of laps on a stop watch.
-		clock.restart();
+		//clock.restart();
 
 		// ================================ Update ================================ 
-		//GameManager::getInstance()->Update(dt,num);
 		StateMachine::getInstance()->Update(dt, num);
 		num = 0;
 		// ================================ Draw ================================ 
 		window.clear();
-		//GameManager::getInstance()->Render(window);
 		StateMachine::getInstance()->Render(window);
 
 		window.display();

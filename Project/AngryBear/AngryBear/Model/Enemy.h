@@ -12,4 +12,7 @@ public:
 	void setIsDeleted(bool isDeleted) {
 		this->isDeleted = isDeleted;
 	}
+	void destroy() {
+		GameMap::m_map[m_mapx][m_mapy] = 0;
+	}
 };
