@@ -1,29 +1,22 @@
 #pragma once
-#include<iostream>
-#include <queue>
-#include "../GameManager.h"
-#include "State.h"
-#include "SFML\Graphics.hpp"
-#include "NextLevelState.h"
-#include "StateMachine.h"
+#include "GamePlayState.h"
 using namespace std;
 
-class GamePlayState : public State {
-private:
-	
-public:
-	GamePlayState(){ }
+int GamePlayState::levelID = 0;
 
-	void Init();
-	void HandleInit(int key);
-	void Update(float dt, int key);
-	void Render(sf::RenderWindow &window);
-	bool isComplete();
-	void UpdateClickEvent(float dt, Vector2f mouse);
-};
+GamePlayState::GamePlayState() {
+
+}
+GamePlayState::GamePlayState(bool nextLevel) {
+	if (nextLevel == true)
+	{
+		levelID++;
+	}
+}
 
 void GamePlayState::Init() {
-	GameManager::getInstance()->Init();
+	GameManager::getInstance()->Init(levelID);
+
 }
 void GamePlayState::HandleInit(int key) {
 
@@ -43,7 +36,6 @@ bool GamePlayState::isComplete() {
 	if (GameManager::getInstance()->getIsComplete() == WIN)
 	{
 		StateMachine::getInstance()->AddState(new NextLevelState(), true);
-		//return true;
 	}
 	return false;
 }

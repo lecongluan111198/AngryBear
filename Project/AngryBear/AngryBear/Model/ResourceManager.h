@@ -63,6 +63,8 @@ public:
 	char* getKeyImage(int ID);
 	char* getTimeBarImage(int ID);
 	char* getExplodeImage(int ID);
+
+	int getMaxLevel();
 };
 
 ResourceManager* ResourceManager::s_Instance = NULL;
@@ -384,4 +386,8 @@ char* ResourceManager::getExplodeImage(int ID) {
 		return m_Explode[ID];
 	}
 	return NULL;
+}
+
+int ResourceManager::getMaxLevel() {
+	return m_Level.size();
 }

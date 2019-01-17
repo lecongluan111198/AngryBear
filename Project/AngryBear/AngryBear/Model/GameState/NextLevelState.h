@@ -5,56 +5,47 @@
 #include "../ResourceManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
-#include "StateMachine.h"
-#include "GamePlayState.h"
-
+#include "../GameManager.h"
 
 
 using namespace std;
-
 class NextLevelState : public State {
 private:
-	queue<Widget*> m_WidgetQueue;
-	sf::Clock _clock;
-	int m_nLoadFile = 0;
+	Widget *Background;
+	Widget *Title;
+	Widget *RetryButton;
+	Widget *NextButton;
+	
 	bool isCheck = false;
 	void InitWidget() {
-		Widget *widget;
 
-		widget = new Widget();
-		widget->setPos(0, 0);
-		widget->setSize(WINDOWS_W, WINDOWS_H);
-		widget->setImage(TEXTURE_BG);
-		m_WidgetQueue.push(widget);
+		Background = new Widget();
+		Background->setPos(0, 0);
+		Background->setSize(WINDOWS_W, WINDOWS_H);
+		Background->setImage(TEXTURE_BG);
 
-		widget = new Widget();
-		widget->setPos(100, 200);
-		widget->setSize(200, 200);
-		widget->setImage(TEXTURE_WIN);
-		m_WidgetQueue.push(widget);
+		Title = new Widget();
+		Title->setPos(100, 200);
+		Title->setSize(200, 200);
+		Title->setImage(TEXTURE_WIN);
 
-		widget = new Widget();
-		widget->setPos(125, 250);
-		widget->setSize(50, 50);
-		widget->setImage(TEXTURE_PLAYAGAIN);
-		//widget->setState(new GamePlayState());
-		m_WidgetQueue.push(widget);
+		RetryButton = new Widget();
+		RetryButton->setPos(125, 250);
+		RetryButton->setSize(50, 50);
+		RetryButton->setImage(TEXTURE_PLAYAGAIN);
 
-		widget = new Widget();
-		widget->setPos(225, 250);
-		widget->setSize(50, 50);
-		widget->setImage(TEXTURE_NEXTLEVEL);
-		//widget->setState(new GamePlayState(true));
-		m_WidgetQueue.push(widget);
+		NextButton = new Widget();
+		NextButton->setPos(225, 250);
+		NextButton->setSize(50, 50);
+		NextButton->setImage(TEXTURE_NEXTLEVEL);
 	}
 
 public:
 	~NextLevelState() {
-		while (!m_WidgetQueue.empty())
-		{
-			delete m_WidgetQueue.front();
-			m_WidgetQueue.pop();
-		}
+		delete Background;
+		delete Title;
+		delete RetryButton;
+		delete NextButton;
 	}
 	void Init();
 	void HandleInit(int key);
@@ -68,13 +59,11 @@ public:
 void NextLevelState::Init() {
 
 	InitWidget();
-	queue<Widget *> q = m_WidgetQueue;
-	Widget* widget;
-	while (!q.empty()) {
-		widget = q.front();
-		q.pop();
-		widget->Init();
-	}
+
+	Background->Init();
+	Title->Init();
+	RetryButton->Init();
+	NextButton->Init();
 }
 void NextLevelState::HandleInit(int key) {
 
@@ -82,28 +71,27 @@ void NextLevelState::HandleInit(int key) {
 void NextLevelState::Update(float dt, int key) {
 }
 void NextLevelState::Render(sf::RenderWindow &window) {
-	queue<Widget *> q = m_WidgetQueue;
-	Widget* widget;
-	while (!q.empty()) {
-		widget = q.front();
-		q.pop();
-		widget->Render(window);
-	}
+
+	Background->Render(window);
+	Title->Render(window);
+	RetryButton->Render(window);
+	NextButton->Render(window);
 }
 
 void NextLevelState::UpdateClickEvent(float dt, Vector2f mouse) {
-	queue<Widget *> q = m_WidgetQueue;
-	Widget* widget;
-	while (!q.empty()) {
-		widget = q.front();
-		q.pop();
-		sf::FloatRect bounds = widget->getSprite().getGlobalBounds();
 
-		if (bounds.contains(mouse) && widget->getState() != NULL)
-		{
-			StateMachine::getInstance()->AddState(widget->getState());
-			isCheck = true;
-		}
+	sf::FloatRect RetryBtnBounds = RetryButton->getSprite().getGlobalBounds();
+	if (RetryBtnBounds.contains(mouse))
+	{
+		//GamePlayState::levelID++;
+		isCheck = true;
+	}
+		
+	sf::FloatRect NextBtnBounds = NextButton->getSprite().getGlobalBounds();
+	if (NextBtnBounds.contains(mouse))
+	{
+		GameManager::getInstance()->nextLevel();
+		isCheck = true;
 	}
 }
 

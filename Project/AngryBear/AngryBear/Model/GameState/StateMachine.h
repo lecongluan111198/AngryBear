@@ -5,9 +5,6 @@
 #include "SFML/Graphics.hpp"
 #include "State.h"
 
-//#include "LoadingState.h"
-//#include "MainMenuState.h"
-//#include "GamePlayState.h"
 #include "../ResourceManager.h"
 
 using namespace std;
@@ -93,6 +90,7 @@ void StateMachine::Render(sf::RenderWindow &window) {
 		{
 			RemoveState();
 			SwitchState();
+			window.clear();
 		}
 	}
 }

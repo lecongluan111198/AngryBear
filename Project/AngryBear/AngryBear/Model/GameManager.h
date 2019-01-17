@@ -28,12 +28,21 @@ private:
 	TimeBar timebar;
 	static GameManager* s_Instance;
 	int isComplete = UNCOMPLETE;
+	bool isKey;
+	int m_level = 0;
 public:
-	void Init(int m_level)
+	
+	void Init()
 	{
-		
+		stoneEnemy.clear();
+		unRock.clear();
+		Rock.clear();
+		explode.clear();
+		isComplete = UNCOMPLETE;
+		isKey = false;
+
 		//get date from the level
-		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player,gate, timebar, m_level);
+		ResourceManager::getInstance()->loadLevel(stoneEnemy, unRock, Rock, player, gate, timebar, m_level);
 
 		gameMap.Init(TEXTURE_BG);
 		player.Init(ResourceManager::getInstance()->getPlayerImage(player.getColor()-1)); //set image depend on color of player
@@ -42,12 +51,7 @@ public:
 		}
 		gate.Init(ResourceManager::getInstance()->getGateImage(0));
 		timebar.Init(ResourceManager::getInstance()->getTimeBarImage(0));
-		//init for other enemy
-		/*
-		Todo here
-		*/
 	}
-	int count = 0;
 	void Update(float dt, int num)
 	{
 		int flat = 1;
@@ -102,6 +106,7 @@ public:
 								key.setPosx((x + 1) * 35 + 45);
 								key.setPosy(y * 37 + 150);
 								key.Init(ResourceManager::getInstance()->getKeyImage(0));
+								isKey = true;
 							}
 							ex.setPosx((x + 1) * 35 + 45);
 							ex.setPosy(y * 37 + 150);
@@ -141,6 +146,7 @@ public:
 								key.setPosx((x + 1) * 35 + 45);
 								key.setPosy(y * 37 + 150);
 								key.Init(ResourceManager::getInstance()->getKeyImage(0));
+								isKey = true;
 							}
 							
 							ex.setPosx((x + 1) * 35 + 45);
@@ -200,8 +206,10 @@ public:
 			isComplete = WIN;
 			gate.Render(window);
 		}
-		else
+		else if(isKey)
+		{
 			key.Render(window);
+		}
 		timebar.Render(window);
 	}
 	void UpdateClickEvent(float dt, Vector2f mouse) {
@@ -214,7 +222,7 @@ public:
 			player.UpdateColor(dt, ResourceManager::getInstance()->getPlayerImage(player.getColor()-1));
 		}
 	}
-
+	
 	int getIsComplete() {
 		return isComplete;
 	}
@@ -227,7 +235,18 @@ public:
 		return s_Instance;
 	}
 
-
+	int getLevel() {
+		return m_level;
+	}
+	void setLevel(int levelID) {
+		m_level = levelID;
+	}
+	void nextLevel() {
+		if (m_level + 1 < ResourceManager::getInstance()->getMaxLevel())
+			m_level++;
+		else
+			m_level = 0;
+	}
 };
 
 GameManager* GameManager::s_Instance = nullptr;

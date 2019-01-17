@@ -24,6 +24,9 @@ public:
 		sprite.setScale(
 			targetSize.x / sprite.getLocalBounds().width,
 			targetSize.y / sprite.getLocalBounds().height);
+
+		m_isGetKey = false;
+		m_onDestroy = 0;
 	};
 	bool Update(float frameTime,int num) override {
 		switch (num) {
