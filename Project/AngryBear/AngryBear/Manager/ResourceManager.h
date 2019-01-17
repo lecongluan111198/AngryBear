@@ -7,15 +7,17 @@
 #include <vector>
 #include <Windows.h>
 
-
 #include "../Define/Define.h"
-#include "UnableMovingRock.h"
-#include "AbleMovingRock.h"
-#include "Stone.h"
-#include "Player.h"
-#include "GameMap.h"
-#include "Gate.h"
-#include "TimeBar.h"
+#include "../Model/Player.h"
+#include "../Model/Stone.h"
+#include "../Model/GameMap.h"
+#include "../Model/Gate.h"
+#include "../Model/Explode.h"
+#include "../Model/Key.h"
+#include "../Model/UnableMovingRock.h"
+#include "../Model/AbleMovingRock.h"
+#include "../Model/TimeBar.h"
+
 #include "SFML/Graphics.hpp"
 using namespace std;
 using namespace sf;

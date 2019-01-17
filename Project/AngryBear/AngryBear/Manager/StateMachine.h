@@ -3,9 +3,9 @@
 #include <stack>
 #include <queue>
 #include "SFML/Graphics.hpp"
-#include "State.h"
+#include "../GameState/State.h"
 
-#include "../ResourceManager.h"
+#include "ResourceManager.h"
 
 using namespace std;
 

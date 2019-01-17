@@ -1,12 +1,11 @@
 #pragma once
 #include<iostream>
 #include <queue>
-#include "../Widget.h"
-#include "../ResourceManager.h"
+#include "../Model/Widget.h"
+#include "../Manager/ResourceManager.h"
+#include "../Manager/GameManager.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
-#include "../GameManager.h"
-
 
 using namespace std;
 class NextLevelState : public State {

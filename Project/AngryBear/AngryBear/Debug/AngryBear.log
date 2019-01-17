@@ -1,1 +1,24 @@
-﻿
+﻿  Source.cpp
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\gamemap.h(21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\player.h(20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\player.h(95): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\stone.h(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\stone.h(65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\gate.h(11): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\explode.h(18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\key.h(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\timebar.h(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(53): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(63): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(103): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(143): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(177): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(192): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\manager\gamemanager.h(198): warning C4018: '<': signed/unsigned mismatch
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\widget.h(24): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+f:\library\it\game_project\angrybear\project\angrybear\angrybear\model\widget.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  AngryBear.vcxproj -> F:\Library\IT\Game_project\AngryBear\Project\AngryBear\Debug\AngryBear.exe

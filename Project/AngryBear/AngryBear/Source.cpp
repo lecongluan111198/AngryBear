@@ -3,12 +3,12 @@
 #include <vector>
 #include <ctime> 
 #include <iostream>
-#include "Model/GameManager.h"
-#include "Model/ResourceManager.h"
+#include "Manager/GameManager.h"
+#include "Manager/ResourceManager.h"
 #include "SFML/Graphics.hpp"
 #include "Define/Define.h"
-#include "Model\GameState\StateMachine.h"
-#include "Model/GameState/LoadingState.h"
+#include "Manager/StateMachine.h"
+#include "GameState/LoadingState.h"
 using namespace sf;
 using namespace std;
 

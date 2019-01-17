@@ -2,13 +2,10 @@
 #include<iostream>
 #include <queue>
 #include "MainMenuState.h"
-#include "../Widget.h"
-#include "../ResourceManager.h"
+#include "../Model/Widget.h"
+#include "../Manager/StateMachine.h"
 #include "State.h"
 #include "SFML\Graphics.hpp"
-#include "StateMachine.h"
-
-
 
 using namespace std;
 
@@ -27,13 +24,7 @@ private:
 		widget->setImage(TEXTURE_LOGO);
 
 		m_WidgetQueue.push(widget);
-		
-		/*widget = new Widget();
-		widget->setPos(0, WINDOWS_H / 2);
-		widget->setSize(WINDOWS_W, 30);
 
-
-		m_WidgetQueue.push(widget);*/
 	}
 
 public:
@@ -83,7 +74,6 @@ void LoadingState::Render(sf::RenderWindow &window) {
 
 	if (_clock.getElapsedTime().asSeconds() > 1 && m_nLoadFile >= 1)
 	{
-		//StateMachine *a = StateMachine::getInstance();
 		StateMachine::getInstance()->AddState(new MainMenuState());
 
 		isCheck = true;

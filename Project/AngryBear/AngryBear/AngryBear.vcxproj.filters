@@ -28,6 +28,14 @@
     <ClInclude Include="Model\GameState\MainMenuState.h" />
     <ClInclude Include="Model\Explode.h" />
     <ClInclude Include="Model\GameState\NextLevelState.h" />
+    <ClInclude Include="GameState\GamePlayState.h" />
+    <ClInclude Include="GameState\LoadingState.h" />
+    <ClInclude Include="GameState\MainMenuState.h" />
+    <ClInclude Include="GameState\NextLevelState.h" />
+    <ClInclude Include="GameState\State.h" />
+    <ClInclude Include="Manager\GameManager.h" />
+    <ClInclude Include="Manager\ResourceManager.h" />
+    <ClInclude Include="Manager\StateMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AngryBear.rc" />

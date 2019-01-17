@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 #include "SFML/Graphics.hpp"
-#include "../../Define/Define.h"
-
+#include "../Define/Define.h"
+using namespace std;
 class State {
 
 public:

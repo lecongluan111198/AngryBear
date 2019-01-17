@@ -1,12 +1,11 @@
 #pragma once
 #include<iostream>
 #include <queue>
-#include "../Widget.h"
-#include "../ResourceManager.h"
+#include "../Model/Widget.h"
+#include "../Manager/StateMachine.h"
 #include "State.h"
-#include "SFML\Graphics.hpp"
 #include "GamePlayState.h"
-
+#include "SFML\Graphics.hpp"
 using namespace std;
 
 class MainMenuState : public State {

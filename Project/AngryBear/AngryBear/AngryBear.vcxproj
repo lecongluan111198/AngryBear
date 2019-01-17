@@ -20,6 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define\Define.h" />
+    <ClInclude Include="GameState\GamePlayState.h" />
+    <ClInclude Include="GameState\LoadingState.h" />
+    <ClInclude Include="GameState\MainMenuState.h" />
+    <ClInclude Include="GameState\NextLevelState.h" />
+    <ClInclude Include="GameState\State.h" />
+    <ClInclude Include="Manager\GameManager.h" />
+    <ClInclude Include="Manager\ResourceManager.h" />
+    <ClInclude Include="Manager\StateMachine.h" />
     <ClInclude Include="Model\AbleMovingRock.h" />
     <ClInclude Include="Model\Explode.h" />
     <ClInclude Include="Model\GameState\MainMenuState.h" />
@@ -123,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\lib\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\lib\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
