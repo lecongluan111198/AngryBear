@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define\Define.h" />
+    <ClInclude Include="GameState\GameOverState.h" />
     <ClInclude Include="GameState\GamePlayState.h" />
     <ClInclude Include="GameState\LoadingState.h" />
     <ClInclude Include="GameState\MainMenuState.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="Manager\ResourceManager.h" />
     <ClInclude Include="Manager\StateMachine.h" />
     <ClInclude Include="Model\AbleMovingRock.h" />
+    <ClInclude Include="Model\Boom.h" />
     <ClInclude Include="Model\Explode.h" />
     <ClInclude Include="Model\GameState\MainMenuState.h" />
     <ClInclude Include="Model\GameState\NextLevelState.h" />

@@ -142,5 +142,8 @@ public:
 	bool getIsDead() {
 		return m_isDead;
 	}
+	void setIsDead(bool isDead) {
+		m_isDead = isDead;
+	}
 
 };

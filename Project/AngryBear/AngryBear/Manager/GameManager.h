@@ -48,7 +48,7 @@ public:
 		explode.clear();
 		isComplete = UNCOMPLETE;
 		showingKey= false;
-
+		player.setIsDead(false);
 		//set start time
 		//clock.restart();
 		//Timer = 0;

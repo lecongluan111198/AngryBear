@@ -36,6 +36,8 @@
     <ClInclude Include="Manager\GameManager.h" />
     <ClInclude Include="Manager\ResourceManager.h" />
     <ClInclude Include="Manager\StateMachine.h" />
+    <ClInclude Include="Model\Boom.h" />
+    <ClInclude Include="GameState\GameOverState.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AngryBear.rc" />

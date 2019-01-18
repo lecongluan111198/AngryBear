@@ -5,6 +5,7 @@
 #include "../Manager/StateMachine.h"
 #include "State.h"
 #include "NextLevelState.h"
+#include "GameOverState.h"
 #include "SFML\Graphics.hpp"
 
 
@@ -48,7 +49,7 @@ bool GamePlayState::isComplete() {
 	}
 	else if (GameManager::getInstance()->getIsComplete() == GAMEOVER)
 	{
-		StateMachine::getInstance()->AddState(new NextLevelState(), true);
+		StateMachine::getInstance()->AddState(new GameOverState(), true);
 	}
 	return false;
 }
