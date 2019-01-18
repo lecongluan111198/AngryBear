@@ -14,6 +14,8 @@ public:
 	{
 		startTime = -1;
 		nImage = 0;
+		imageX = 0;
+		imageY = 0;
 		m_text = textureName;
 		texture.loadFromFile(textureName, sf::IntRect(238* imageX, 74* imageY, 238, 74));
 		sprite.setTexture(texture);
@@ -35,7 +37,7 @@ public:
 		std::cout << "imageX: " << imageX << std::endl;
 		std::cout << "imageY: " << imageY << std::endl;
 		std::cout << std::endl;
-		if (((int)frameTime - startTime) / 8 >= nImage + 1)
+		if (((int)frameTime - startTime) / (MAX_TIME / 16) >= nImage + 1)
 		{
 			if (nImage < 16)
 			{

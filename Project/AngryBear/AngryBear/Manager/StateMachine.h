@@ -3,6 +3,7 @@
 #include <stack>
 #include <queue>
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include "../GameState/State.h"
 
 #include "ResourceManager.h"
@@ -11,11 +12,20 @@ using namespace std;
 
 class StateMachine {
 private:
+	sf::Music music;
 	queue<State*> m_states;
 	State* m_newState;
 	static StateMachine* s_Instance;
 	bool isReplace = false;
 	StateMachine(){
+		if (!music.openFromFile(MUSIC))
+		{
+			std::cout << "ERROR" << std::endl;
+		}
+		else
+		{
+			music.play();
+		}
 	}
 public:
 	static StateMachine* getInstance();

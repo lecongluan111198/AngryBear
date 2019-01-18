@@ -9,9 +9,11 @@ private:
 	const char* text;
 	int i =0, j=0;
 	bool expired;
+	int posionExplodeImage;
 public:
 	void Init(const char* textureName) override
 	{
+		posionExplodeImage = 0;
 		texture.loadFromFile(textureName, sf::IntRect(128*j,128*i , 128, 128));
 		sprite.setTexture(texture);
 		text = textureName;
@@ -23,6 +25,7 @@ public:
 			targetSize.y / sprite.getLocalBounds().height);
 	};
 	bool Update(float frameTime, int num) override {
+		posionExplodeImage++;
 		j ++;
 		if (j == 4) {
 			i++;
@@ -36,5 +39,8 @@ public:
 	}
 	bool isExpired() {
 		return expired;
+	}
+	int getPosionExplodeImage() {
+		return i;
 	}
 };

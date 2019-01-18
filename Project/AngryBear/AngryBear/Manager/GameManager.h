@@ -13,6 +13,7 @@
 #include "../Model/TimeBar.h"
 #include "../Model/Boom.h"
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include "ResourceManager.h"
 
 
@@ -21,7 +22,8 @@ using namespace std;
 class GameManager
 {
 private:
-	//sf::Clock clock;
+	sf::Music bombMusic;
+
 	int Timer;
 	Player player;
 	GameMap gameMap;
@@ -49,6 +51,7 @@ public:
 		isComplete = UNCOMPLETE;
 		showingKey= false;
 		player.setIsDead(false);
+		bombMusic.openFromFile(BOMBMUSIC);
 		//set start time
 		//clock.restart();
 		//Timer = 0;
@@ -142,7 +145,7 @@ public:
 						if (Rock[i].getIsDeleted()) {
 							
 							for (int j = 0; j < boom.size(); j++) {
-								if (boom[j].getPosx() == Rock[i].getPosx() && Rock[j].getPosy() == Rock[i].getPosy())
+								if (boom[j].getPosx() == Rock[i].getPosx() && boom[j].getPosy() == Rock[i].getPosy())
 								{
 									boom[j].setIsExplode(true);
 									ex.setPosx(boom[j].getPosx());
@@ -292,10 +295,15 @@ public:
 		gameMap.Render(window);
 		if(player.getIsDead() == false)
 			player.Render(window);
-		int j = 0;
+
+		if (explode.size() > 0 && explode[0].getPosionExplodeImage() == 0)
+		{
+			bombMusic.play();
+		}
 		for (int i = 0; i < explode.size(); i++) {
 			if (!explode[i].isExpired())
 			{
+				
 				explode[i].Render(window);
 				flag = true;
 			}
@@ -328,12 +336,17 @@ public:
 
 		
 		if (!flag) {
+			bombMusic.stop();
 			explode.clear();
 		}
 		if (player.getSetKey() && !flag)
 		{
 			isComplete = WIN;
 			gate.Render(window);
+		}
+		if (player.getIsDead() && !flag)
+		{
+			isComplete = GAMEOVER;
 		}
 		else if(showingKey)
 		{
@@ -345,7 +358,6 @@ public:
 	void UpdateClickEvent(float dt, Vector2f mouse) {
 		sf::FloatRect bounds = player.getSprite().getGlobalBounds();
 
-		
 		if (bounds.contains(mouse))
 		{
 			player.changeColor();

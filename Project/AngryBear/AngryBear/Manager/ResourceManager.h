@@ -4,6 +4,7 @@
 #include <map>
 #include <fstream>
 #include <string.h>
+#include <string>
 #include <vector>
 #include <Windows.h>
 
@@ -247,16 +248,17 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	//get stone
 	quantity = GetPrivateProfileInt("STONE", "Quantity", 0, Path);
 	Stone tempStone;
-	char POSXK[6] = "PosX1";
-	char POSYK[6] = "PosY1";
+	/*char POSXK[6] = "PosX1";
+	char POSYK[6] = "PosY1";*/
 	char COLORK[7] = "Color1";
+	string px, py;
 
 	for (int i = 0; i < quantity; i++) {
-		POSXK[4] = i + 1 + 48;
-		POSYK[4] = i + 1 + 48;
+		px = "PosX" + to_string(i + 1);
+		py = "PosY" + to_string(i + 1);
 		COLORK[5] = i + 1 + 48;
-		posx = GetPrivateProfileInt("STONE", POSXK, 0, Path);
-		posy = GetPrivateProfileInt("STONE", POSYK, 0, Path);
+		posx = GetPrivateProfileInt("STONE", px.c_str(), 0, Path);
+		posy = GetPrivateProfileInt("STONE", py.c_str(), 0, Path);
 		color = GetPrivateProfileInt("STONE", COLORK, 1, Path);
 
 		tempStone.setPosx(posx);
@@ -272,11 +274,13 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	//get unablemovingrock
 	quantity = GetPrivateProfileInt("UNABLEMOVINGROCK", "Quantity", 0, Path);
 	UnableMovingRock tempUnRock;
+	
 	for (int i = 0; i < quantity; i++) {
-		POSXK[4] = i + 1 + 48;
-		POSYK[4] = i + 1 + 48;
-		posx = GetPrivateProfileInt("UNABLEMOVINGROCK", POSXK, 0, Path);
-		posy = GetPrivateProfileInt("UNABLEMOVINGROCK", POSYK, 0, Path);
+		
+		px = "PosX"+ to_string(i + 1);
+		py = "PosY" + to_string(i + 1);
+		posx = GetPrivateProfileInt("UNABLEMOVINGROCK", px.c_str(), 0, Path);
+		posy = GetPrivateProfileInt("UNABLEMOVINGROCK", py.c_str(), 0, Path);
 	
 		tempUnRock.setPosx(posx);
 		tempUnRock.setPosy(posy);
@@ -291,10 +295,10 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	quantity = GetPrivateProfileInt("ABLEMOVINGROCK", "Quantity", 0, Path);
 	AbleMovingRock tempRock;
 	for (int i = 0; i < quantity; i++) {
-		POSXK[4] = i + 1 + 48;
-		POSYK[4] = i + 1 + 48;
-		posx = GetPrivateProfileInt("ABLEMOVINGROCK", POSXK, 0, Path);
-		posy = GetPrivateProfileInt("ABLEMOVINGROCK", POSYK, 0, Path);
+		px = "PosX" + to_string(i + 1);
+		py = "PosY" + to_string(i + 1);
+		posx = GetPrivateProfileInt("ABLEMOVINGROCK", px.c_str(), 0, Path);
+		posy = GetPrivateProfileInt("ABLEMOVINGROCK", py.c_str(), 0, Path);
 
 		tempRock.setPosx(posx);
 		tempRock.setPosy(posy);
@@ -328,11 +332,11 @@ void ResourceManager::loadLevel(vector<Stone> &stone, vector<UnableMovingRock> &
 	quantity = GetPrivateProfileInt("BOOM", "Quantity", 0, Path);
 	Boom boom1;
 	for (int i = 0; i < quantity; i++) {
-		POSXK[4] = i + 1 + 48;
-		POSYK[4] = i + 1 + 48;
-		posx = GetPrivateProfileInt("BOOM", POSXK, 0, Path);
-		posy = GetPrivateProfileInt("BOOM", POSYK, 0, Path);
-
+		px = "PosX" + to_string(i + 1);
+		py = "PosY" + to_string(i + 1);
+		posx = GetPrivateProfileInt("BOOM", px.c_str(), 0, Path);
+		posy = GetPrivateProfileInt("BOOM", py.c_str(), 0, Path);
+		
 		boom1.setPosx(posx);
 		boom1.setPosy(posy);
 		int x = (posx - MAP_BORDER_X_MIN - P_SIZE + 2) / (P_SIZE - 2);
