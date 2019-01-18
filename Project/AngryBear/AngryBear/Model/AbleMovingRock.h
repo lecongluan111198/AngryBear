@@ -56,6 +56,7 @@ public:
 		default:
 			break;
 		}
+		
 		if (GameMap::m_map[m_mapx][m_mapy] == BOOM_ID)
 		{
 			destroy();

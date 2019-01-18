@@ -158,18 +158,19 @@ public:
 				}
 			}
 		}
-
-		if (flat == 1)
-			player.Update(dt, num);
-		if (player.getIsDead()) {
-			for (int i = 0; i < boom.size(); i++) {
-				if (boom[i].getPosx() == player.getPosx() && boom[i].getPosy() == player.getPosy())
-				{
-					boom[i].setIsExplode(true);
-					ex.setPosx(boom[i].getPosx());
-					ex.setPosy(boom[i].getPosy());
-					ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
-					explode.push_back(ex);
+		if (player.getIsDead() == false) {
+			if (flat == 1)
+				player.Update(dt, num);
+			if (player.getIsDead()) {
+				for (int i = 0; i < boom.size(); i++) {
+					if (boom[i].getPosx() == player.getPosx() && boom[i].getPosy() == player.getPosy())
+					{
+						boom[i].setIsExplode(true);
+						ex.setPosx(boom[i].getPosx());
+						ex.setPosy(boom[i].getPosy());
+						ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+						explode.push_back(ex);
+					}
 				}
 			}
 		}
@@ -396,7 +397,7 @@ public:
 			}
 
 		}
-
+		
 		for (int i = 0; i < unRock.size(); i++) {
 			if (unRock[i].getIsDeleted() == false)
 			{
@@ -427,6 +428,17 @@ public:
 				ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
 				explode.push_back(ex);
 			}
+		}
+		for (int i = 0; i < boom.size(); i++) {
+			if (boom[i].getIsExplode() == false)
+			{
+				boom[i].setIsExplode(true);
+				ex.setPosx(boom[i].getPosx());
+				ex.setPosy(boom[i].getPosy());
+				ex.Init(ResourceManager::getInstance()->getExplodeImage(0));
+				explode.push_back(ex);
+			}
+
 		}
 	}
 };
